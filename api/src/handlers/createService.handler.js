@@ -7,8 +7,6 @@ const createService = async(req, res) => {
     
     const existTypeService = await findTypeService(typeService);
 
-    if(!existTypeService) return res.status(422).json({message: "It doesn't exist the type of Service send"});
-
     const newService = await createServiceController(name, price, description);
     
     await linkTypeserviceService(existTypeService, newService);

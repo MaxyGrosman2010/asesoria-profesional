@@ -1,5 +1,5 @@
 const {Router} = require('express');
-// const getRouter = require('./getRouter');
+// const getRouter = require('./getRouter.route');
 const createServiceRouter = require('./createService.route');
 const createTypeServiceRouter = require('./createTypeService.route');
 
