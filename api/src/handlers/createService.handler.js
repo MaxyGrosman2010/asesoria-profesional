@@ -1,4 +1,6 @@
-const createServiceController = require('../controllers/createService.controller')
+const createServiceController = require('../controllers/createService.controller');
+const findTypeService = require('../controllers/findTypeService.controller');
+const linkTypeserviceService = require('../controllers/linkTypeserviceService.controller');
 
 const createService = async(req, res) => {
     const {name, typeService, price, description} = req.body;
@@ -9,9 +11,9 @@ const createService = async(req, res) => {
 
     const newService = await createServiceController(name, price, description);
     
-    linkTypeserviceService(existTypeService, newService);
+    await linkTypeserviceService(existTypeService, newService);
 
-    res.status(200).json({message: "Success"});
+    res.status(200).json(newService);
 };
 
 module.exports = createService;

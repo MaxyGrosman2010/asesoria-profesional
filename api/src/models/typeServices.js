@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrment: true,
+            autoIncrement: true,
             allowNull: false,
             unique: true
         },
@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
                 'Legal',
                 'Medicina', 
                 'Automotor', 
-                'Construcción', 
+                'Construccion', 
                 'Educacion', 
                 'Tech', 
                 'Otros'),
