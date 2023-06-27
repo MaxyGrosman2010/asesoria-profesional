@@ -10,11 +10,11 @@ const createService = async(req, res) => {
 
     if(!errors.isEmpty()) throw new Error(errors.throw());
     
-    const {name, typeService, price, description} = req.body;
+    const {name, typeService, price, description, files} = req.body;
     
     const existTypeService = await findTypeService(typeService);
 
-    const newService = await createServiceController(name, price, description);
+    const newService = await createServiceController(name, price, description, files);
     
     await linkTypeserviceService(existTypeService, newService);
 
