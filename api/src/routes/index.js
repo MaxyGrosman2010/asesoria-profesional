@@ -3,6 +3,7 @@ const {Router} = require('express');
 const createServiceRouter = require('./createService.route');
 const createTypeServiceRouter = require('./createTypeService.route');
 const getAllTypeServiceRouter = require('./getAllTypeService.route');
+const getAllServiceRouter = require('./getAllServices.route');
 
 const router = Router();
 
@@ -10,5 +11,6 @@ const router = Router();
 router.use('/service', createServiceRouter);
 router.use('/typeService', createTypeServiceRouter);
 router.use('/allTypeService', getAllTypeServiceRouter);
+router.use('/allService', getAllServiceRouter);
 
 module.exports = router;
