@@ -2,7 +2,8 @@ const createServiceController = require('../controllers/createService.controller
 const findTypeService = require('../controllers/findTypeService.controller');
 const linkTypeserviceService = require('../controllers/linkTypeserviceService.controller');
 const {validationResult} = require('express-validator');
-const firebaseUploader = require('../config/firebase.config');
+const findUserById = require('../controllers/findUserById.controller');
+const linkServiceUser = require('../controllers/linkServiceUser.controller');
 
 const createService = async(req, res) => {
     try{
@@ -11,20 +12,25 @@ const createService = async(req, res) => {
 
     if(!errors.isEmpty()) throw new Error(errors.throw());
     
-    const {name, typeService, price, description, file} = req.body;
+    const {idUser ,name, typeService, price, description} = req.body;
+
+    const existUser = await findUserById(idUser);
+
+    if(!existUser) return res.status(404).json({message: "The id of the user send is invalid"});
     
     const existTypeService = await findTypeService(typeService);
 
-    const uploadPicture = await firebaseUploader(file);
-
-    const newService = await createServiceController(name, price, description, uploadPicture);
+    const newService = await createServiceController(name, price, description, req.file);
     
     await linkTypeserviceService(existTypeService, newService);
+
+    await linkServiceUser(existUser, newService);
 
     res.status(200).json(newService);
     
     }catch(error){
-        res.status(422).json({error: "Incomplete Fields"});
+        console.log(error);
+        res.status(422).json(error);
     };
 };
 

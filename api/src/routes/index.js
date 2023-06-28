@@ -10,6 +10,7 @@ const getLogInHandler = require("../handlers/getLogInGoogleHandler");
 require("../middleware/passport");
 const singUpRouter = require("./singUp.router");
 const singInRouter = require("./singIn.router");
+const editUserRouter = require('./editUser.route');
 
 const router = Router();
 
@@ -29,5 +30,6 @@ router.get("/auth/callback", getLogInHandler.authCallback);
 router.get("/auth/callback/success", getLogInHandler.loginSuccess);
 router.get("/auth/callback/failure", getLogInHandler.loginFailure);
 router.post("/logout", getLogInHandler.getLogout);
+router.use('/editUser',editUserRouter);
 
 module.exports = router;
