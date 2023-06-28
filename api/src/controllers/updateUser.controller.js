@@ -5,17 +5,15 @@ const updateUser = async(id, name, email, password, cellPhone, file) => {
 
     const uploaded = await firebaseUploader(file);
 
-    const updated = User.update(
-        {id: id},
-        {where: {
-            name: name, 
-            email: email, 
-            password: password,
-            cellPhone: cellPhone,
-            profilePict: uploaded
-    }});
+    const user = await User.update({
+        name: name, 
+        email: email, 
+        password: password, 
+        cellPhone: cellPhone,
+        profilePict: uploaded 
+    }, {where: {id: id}});
 
-    return updated;
+    return user;
 }
 
 module.exports = updateUser;

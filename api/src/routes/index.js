@@ -25,7 +25,7 @@ router.use("/nameService", getServiceByName);
 router.use("/singUp", singUpRouter);
 router.use("/singIn", singInRouter);
 router.use('/editUser',editUserRouter);
-router.use('/editService', editServiceRouter)
+router.use('/editService', editServiceRouter);
 //!REFERIDO A LOGIN GOOGLE
 router.get("/loginGoogle", getLogInHandler.getLogin);
 router.get("/auth", getLogInHandler.authenticate);

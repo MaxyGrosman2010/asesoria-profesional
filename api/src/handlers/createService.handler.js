@@ -24,9 +24,9 @@ const createService = async(req, res) => {
     
     await linkTypeserviceService(existTypeService, newService);
 
-    await linkServiceUser(existUser, newService);
+    const result = await linkServiceUser(existUser, newService);
 
-    res.status(200).json(newService);
+    res.status(200).json(result);
     
     }catch(error){
         console.log(error);
