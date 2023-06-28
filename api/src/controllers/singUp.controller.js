@@ -1,14 +1,15 @@
 const { User } = require("../db.js");
 const hashPassword = require("../utils/hashPassword.js");
-const { tokenCreated, refreshToken } = require("../utils/createToken.js");
-const { SECRET_KEY } = process.env;
-//! colocar en su archivo .env SECRET_KEY=${su clave}
+const firebaseUploader = require('../utils/firebaseUploader.js');
 
-const singUpController = async (req) => {
+const singUpController = async (req, file) => {
   try {
-    const { name, password, cellPhone, email, profilePict } = req;
+    const { name, password, cellPhone, email } = req;
 
-    // Verificar si el email ya existe en la base de datos
+    //subimos la imagen a firebase y obtenemos su URL
+    const uploadImage =await firebaseUploader(file);
+
+    // Verificamos si el email ya existe en la base de datos
     const existingUser = await User.findOne({ where: { email } });
 
     if (existingUser) {
@@ -23,7 +24,7 @@ const singUpController = async (req) => {
       name,
       password: passwordSinUp,
       email,
-      profilePict,
+      profilePict: uploadImage,
       cellPhone,
     });
     await newUser.save();

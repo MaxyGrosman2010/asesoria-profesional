@@ -1,9 +1,11 @@
 const { Router } = require("express");
 const  singUp  = require("../handlers/singUp.handler");
 const { validateSingUp } = require("../middleware/validateSingUpData");
+const { uploadSingUp } = require("../config/multer.config");
+
 
 const router = Router();
 
-router.post("/", validateSingUp, singUp);
+router.post("/", uploadSingUp, validateSingUp, singUp);
 
 module.exports = router;
