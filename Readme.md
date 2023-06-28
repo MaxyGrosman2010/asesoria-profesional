@@ -45,7 +45,7 @@
 ###    password: string
 ###    cellphone: int
 ###    profilePict: archivo de imagen a convertir
-###
+
 ## Post SignIn: http://localhost:3001/singIn
 ###    Necesita por body:
 ###    email: string,
