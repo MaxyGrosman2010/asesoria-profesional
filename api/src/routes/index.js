@@ -7,6 +7,9 @@ const getAllServiceRouter = require('./getAllServices.route');
 const getServiceById = require('./getServiceById.route');
 const getServiceByName = require('./getServiceByName');
 const getLogInHandler = require('../handlers/getLogInGoogleHandler');
+const singUpRouter = require("./singUp.router");
+const singInRouter = require("./singIn.router");
+
 require('../middleware/passport');
 
 const router = Router();
@@ -18,6 +21,8 @@ router.use('/allTypeService', getAllTypeServiceRouter);
 router.use('/allService', getAllServiceRouter);
 router.use('/serviceById', getServiceById);
 router.use('/nameService', getServiceByName);
+router.use("/singUp", singUpRouter);
+router.use("/singIn", singInRouter);
 //!REFERIDO A LOGIN GOOGLE
 router.get('/loginGoogle', getLogInHandler.getLogin);
 router.get('/auth', getLogInHandler.authenticate);
