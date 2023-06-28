@@ -13,7 +13,8 @@ const editService = async(req, res) => {
 
         res.status(200).json(updatedService);
     }catch(error){
-        res.status(422).json({message: "Incomplete fields"});
+        console.log(error);
+        res.status(200).json(error);
     };
 };
 
