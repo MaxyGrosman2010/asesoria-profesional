@@ -11,6 +11,7 @@ require("../middleware/passport");
 const singUpRouter = require("./singUp.router");
 const singInRouter = require("./singIn.router");
 const editUserRouter = require('./editUser.route');
+const editServiceRouter = require('./editService.route');
 
 const router = Router();
 
@@ -23,6 +24,8 @@ router.use("/serviceById", getServiceById);
 router.use("/nameService", getServiceByName);
 router.use("/singUp", singUpRouter);
 router.use("/singIn", singInRouter);
+router.use('/editUser',editUserRouter);
+router.use('/editService', editServiceRouter)
 //!REFERIDO A LOGIN GOOGLE
 router.get("/loginGoogle", getLogInHandler.getLogin);
 router.get("/auth", getLogInHandler.authenticate);
@@ -30,6 +33,5 @@ router.get("/auth/callback", getLogInHandler.authCallback);
 router.get("/auth/callback/success", getLogInHandler.loginSuccess);
 router.get("/auth/callback/failure", getLogInHandler.loginFailure);
 router.post("/logout", getLogInHandler.getLogout);
-router.use('/editUser',editUserRouter);
 
 module.exports = router;
