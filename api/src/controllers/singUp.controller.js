@@ -6,7 +6,7 @@ const { SECRET_KEY } = process.env;
 
 const singUpController = async (req) => {
   try {
-    const { name, password, profilePict, email } = req;
+    const { name, password, cellPhone, email, profilePict } = req;
 
     // Verificar si el email ya existe en la base de datos
     const existingUser = await User.findOne({ where: { email } });
@@ -24,7 +24,7 @@ const singUpController = async (req) => {
       password: passwordSinUp,
       email,
       profilePict,
-     
+      cellPhone,
     });
     await newUser.save();
   } catch (error) {
