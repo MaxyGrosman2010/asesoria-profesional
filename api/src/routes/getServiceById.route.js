@@ -4,6 +4,6 @@ const getServiceById = require('../handlers/getServiceById.handler');
 const validateServiceById = require('../middleware/validateServiceById');
 const verifyToken = require("../middleware/verifyToken");
 
-router.get("/:idService", verifyToken,validateServiceById, getServiceById);
+router.get("/:idService",validateServiceById, getServiceById);
 
 module.exports = router;
