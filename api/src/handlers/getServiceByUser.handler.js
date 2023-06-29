@@ -7,7 +7,9 @@ const getServiceByUserId = async(req, res) => {
 
     if(!userWithService) return res.status(422).json({message: "Este usuario no existe"});
 
-    res.status(200).json(userWithService);
+    const {Services} = userWithService;
+
+    res.status(200).json(Services);
 };
 
 module.exports = getServiceByUserId;

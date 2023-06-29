@@ -13,9 +13,10 @@ const getServiceById = async(req, res) => {
 
         const {id, name, price, description, files, TypeServices} = service;
         const {type} = TypeServices[0];
-        const result = {id, name, price, description, files, typeService: type};
+        const result = {id, name, price, description, files, type};
 
         res.status(200).json(result);
+        
     }catch(error){
         res.status(422).json({error: "The id wasn't send properly"});
     }
