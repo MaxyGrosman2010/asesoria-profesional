@@ -12,7 +12,7 @@ const createService = async(req, res) => {
 
     if(!errors.isEmpty()) throw new Error(errors.throw());
     
-    const {idUser ,name, typeService, price, description} = req.body;
+    const {idUser = req.id ,name, typeService, price, description} = req.body;
 
     const existUser = await findUserById(idUser);
 
@@ -26,7 +26,7 @@ const createService = async(req, res) => {
 
     const result = await linkServiceUser(existUser, newService);
 
-    res.status(200).json(result);
+    res.status(200).json({message: "servicio creado con exito"});
     
     }catch(error){
         console.log(error);
