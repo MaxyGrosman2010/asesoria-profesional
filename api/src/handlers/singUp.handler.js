@@ -12,7 +12,7 @@ const singUp = async (req, res) => {
     const siningUp = await singUpController(req.body, req.file, USER_CREATION);
 
     if (siningUp?.error) {
-      console.log(siningUp);
+      //console.log(siningUp);
       return res.status(401).json(siningUp);
     } 
     
