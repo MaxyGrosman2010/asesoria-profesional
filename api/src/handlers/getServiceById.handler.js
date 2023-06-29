@@ -18,8 +18,10 @@ const getServiceById = async(req, res) => {
         res.status(200).json(result);
         
     }catch(error){
-        res.status(422).json({error: "The id wasn't send properly"});
-    }
+
+        console.log(error);
+        res.status(422).json(error);
+    };
 };
 
 module.exports = getServiceById;
