@@ -2,7 +2,7 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const loadBackend = require('./src/middleware/loadBackend.js');
 
-conn.sync({force: false}).then( async() => {
+conn.sync({force: true}).then( async() => {
 
   await loadBackend();
 

@@ -7,8 +7,8 @@ const singUp = async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) throw new Error(errors.throw());
-
-    const siningUp = await singUpController(req.body);
+   // console.log(req.file);
+    const siningUp = await singUpController(req.body, req.file);
 
     if (siningUp?.error) {
       console.log(siningUp);
