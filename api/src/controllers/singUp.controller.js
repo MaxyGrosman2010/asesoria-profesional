@@ -1,13 +1,15 @@
 const { User } = require("../db.js");
 const hashPassword = require("../utils/hashPassword.js");
 const firebaseUploader = require('../utils/firebaseUploader.js');
+const sendEmailNotification = require('../utils/senderMail')
 
-const singUpController = async (req, file) => {
+
+const singUpController = async (req, file, typeNotification) => {
   try {
     const { name, password, cellPhone, email } = req;
 
     //subimos la imagen a firebase y obtenemos su URL
-    const uploadImage =await firebaseUploader(file);
+    const uploadImage = await firebaseUploader(file);
 
     // Verificamos si el email ya existe en la base de datos
     const existingUser = await User.findOne({ where: { email } });
@@ -28,6 +30,9 @@ const singUpController = async (req, file) => {
       cellPhone,
     });
     await newUser.save();
+
+    return sendEmailNotification(typeNotification, newUser.email);
+    
   } catch (error) {
     console.log(error);
   }
