@@ -8,6 +8,7 @@ const session = require('express-session'); //manejo de sesion google
 const cors = require('cors');
 require('./db.js');
 require('./middleware/passport.js');
+require('dotenv').config();
 const server = express();
 
 server.name = 'API';
