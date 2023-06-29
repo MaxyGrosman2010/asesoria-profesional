@@ -12,6 +12,7 @@ const singUpRouter = require("./singUp.router");
 const singInRouter = require("./singIn.router");
 const editUserRouter = require('./editUser.route');
 const editServiceRouter = require('./editService.route');
+const getUserByIdRouter = require('./getUserForEdit.route');
 
 const router = Router();
 
@@ -26,6 +27,7 @@ router.use("/singUp", singUpRouter);
 router.use("/singIn", singInRouter);
 router.use('/editUser',editUserRouter);
 router.use('/editService', editServiceRouter);
+router.use('/getUserById', getUserByIdRouter);
 //!REFERIDO A LOGIN GOOGLE
 router.get("/loginGoogle", getLogInHandler.getLogin);
 router.get("/auth", getLogInHandler.authenticate);

@@ -24,9 +24,9 @@ const createService = async(req, res) => {
     
     await linkTypeserviceService(existTypeService, newService);
 
-    const result = await linkServiceUser(existUser, newService);
+    await linkServiceUser(existUser, newService);
 
-    res.status(200).json(result);
+    res.status(200).json({message: "Service created successfully"});
     
     }catch(error){
         console.log(error);
