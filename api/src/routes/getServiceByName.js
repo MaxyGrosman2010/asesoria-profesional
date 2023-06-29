@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { Op } = require('sequelize');
 const { Service } = require('../db');
 const router = Router();
+const verifyToken = require("../middleware/verifyToken");
 
 router.get('/', async (req, res) => {
   try {

@@ -1,7 +1,8 @@
-const {Router} = require('express');
+const { Router } = require("express");
 const router = Router();
-const createTypeService = require('../handlers/createTypeService.handler');
+const createTypeService = require("../handlers/createTypeService.handler");
+const verifyToken = require("../middleware/verifyToken");
 
-router.post('/', createTypeService);
+router.post("/", verifyToken, createTypeService);
 
 module.exports = router;

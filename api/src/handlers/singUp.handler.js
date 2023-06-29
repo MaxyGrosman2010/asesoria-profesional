@@ -1,6 +1,7 @@
 require("dotenv").config();
 const singUpController  = require("../controllers/singUp.controller");
 const { validationResult } = require("express-validator");
+const {USER_CREATION}= process.env
 
 const singUp = async (req, res) => {
   try {
@@ -8,16 +9,17 @@ const singUp = async (req, res) => {
 
     if (!errors.isEmpty()) throw new Error(errors.throw());
    // console.log(req.file);
-    const siningUp = await singUpController(req.body, req.file);
+    const siningUp = await singUpController(req.body, req.file, USER_CREATION);
 
     if (siningUp?.error) {
-      console.log(siningUp);
+      //console.log(siningUp);
       return res.status(401).json(siningUp);
     } 
     
 
     return res.status(200).json({
       status: "usuario creado con exito",
+      notification: `Correo enviado con exito a ${siningUp}`,
     });
   } catch (error) {
     console.log(error);
