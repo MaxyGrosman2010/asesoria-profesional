@@ -39,7 +39,7 @@ const getLogInHandler = {
         // Hacer cualquier otra acción necesaria después de agregar el usuario
       })
       .catch((error) => {
-        console.error('Error al verificar y crear el usuario:', error);
+        console.error('ALERTA:', error);
         // Manejar el error de alguna manera adecuada
       });
   },
