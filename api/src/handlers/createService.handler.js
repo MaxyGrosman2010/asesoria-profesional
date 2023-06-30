@@ -1,37 +1,54 @@
-const createServiceController = require('../controllers/createService.controller');
-const findTypeService = require('../controllers/findTypeService.controller');
-const linkTypeserviceService = require('../controllers/linkTypeserviceService.controller');
-const {validationResult} = require('express-validator');
-const findUserById = require('../controllers/findUserById.controller');
-const linkServiceUser = require('../controllers/linkServiceUser.controller');
+const createServiceController = require("../controllers/createService.controller");
+const findTypeService = require("../controllers/findTypeService.controller");
+const linkTypeserviceService = require("../controllers/linkTypeserviceService.controller");
+const { validationResult } = require("express-validator");
+const findUserById = require("../controllers/findUserById.controller");
+const linkServiceUser = require("../controllers/linkServiceUser.controller");
+const sendEmailNotification = require("../utils/senderMail");
+const { SERVICE_CREATION } = process.env;
 
-const createService = async(req, res) => {
-    try{
-    
+const createService = async (req, res) => {
+  try {
     const errors = validationResult(req);
 
-    if(!errors.isEmpty()) throw new Error(errors.throw());
-    
-    const {idUser ,name, typeService, price, description} = req.body;
+    if (!errors.isEmpty()) throw new Error(errors.throw());
+
+    const {
+      idUser = req.id,
+      name,
+      typeService,
+      price,
+      description,
+      email = req.email,
+    } = req.body;
 
     const existUser = await findUserById(idUser);
 
-    if(!existUser) return res.status(404).json({message: "The id of the user send is invalid"});
-    
+    if (!existUser)
+      return res
+        .status(404)
+        .json({ message: "The id of the user send is invalid" });
+
     const existTypeService = await findTypeService(typeService);
 
-    const newService = await createServiceController(name, price, description, req.file);
-    
+    const newService = await createServiceController(
+      name,
+      price,
+      description,
+      req.file
+    );
+
     await linkTypeserviceService(existTypeService, newService);
 
     const result = await linkServiceUser(existUser, newService);
 
-    res.status(200).json(result);
-    
-    }catch(error){
-        console.log(error);
-        res.status(422).json(error);
-    };
+    sendEmailNotification(SERVICE_CREATION, email);
+
+    res.status(200).json({ message: "servicio creado con exito" });
+  } catch (error) {
+    console.log(error);
+    res.status(422).json(error);
+  }
 };
 
 module.exports = createService;

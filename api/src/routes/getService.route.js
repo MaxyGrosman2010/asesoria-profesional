@@ -4,10 +4,9 @@ const {
   getServiceHandler,
   getServiceByIdHandler,
 } = require('../handlers/getServiceHandler');
+const verifyToken = require("../middleware/verifyToken");
 
-require('../middlewares/passport');
-
-getRouter.get('services/all', getServiceHandler);
-getRouter.get('services/:id', getServiceByIdHandler);
+getRouter.get('services/all',verifyToken, getServiceHandler);
+getRouter.get('services/:id',verifyToken, getServiceByIdHandler);
 
 module.exports = getRouter;

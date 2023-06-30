@@ -10,8 +10,7 @@ const singInHandler = async (req, res) => {
 
     const tokenReceived = await singInController(req.body);
 
-    if (tokenReceived.message)
-      return res.status(401).json(tokenReceived);
+    if (tokenReceived.error) return res.status(401).json(tokenReceived);
     
     console.log(tokenReceived);
 

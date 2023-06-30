@@ -5,7 +5,7 @@ const validateSingUp = [
   body("password").notEmpty().withMessage("password es requerido"),
   body("cellPhone")
     .notEmpty()
-    .isNumeric()
+    //.isNumeric()
     .withMessage("cellPhone es requerido"),
   body("email").notEmpty().withMessage("email es requerido"),
   // body("isAdmin")
