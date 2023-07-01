@@ -10,7 +10,15 @@ const getServiceByUserId = async(req, res) => {
 
         const {Services} = userWithService;
 
-        res.status(200).json(Services);
+        const services = Services.map((service) => {
+            const {id, name, price, description, files, TypeServices, user_id} = service;
+            const {type} = TypeServices[0];
+            const result = {id, name, price, description, files, type, user_id};
+
+            return result;
+        });
+
+        res.status(200).json(services);
     }catch(error){
         
         console.log(error);

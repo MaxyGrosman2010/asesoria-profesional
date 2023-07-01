@@ -11,9 +11,9 @@ const getServiceById = async(req, res) => {
 
         const service = await serviceById(idService);
 
-        const {id, name, price, description, files, TypeServices} = service;
+        const {id, name, price, description, files, TypeServices, user_id} = service;
         const {type} = TypeServices[0];
-        const result = {id, name, price, description, files, type};
+        const result = {id, name, price, description, files, type, user_id};
 
         res.status(200).json(result);
         

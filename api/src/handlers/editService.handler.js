@@ -10,9 +10,18 @@ const editService = async(req, res) => {
         const {id, name, price, description} = req.body;
 
         const updatedService = await updateService(id, name, price, description, req.file);
+        const {type} = updatedService.TypeService[0];
 
-        res.status(200).json(updatedService);
+        const result = {
+            id: updatedService.id,
+            name: updatedService.name,
+            price: updatedService.price,
+            description: updatedService.description,
+            files: updatedService.files,
+            typeService: type
+        };
 
+        res.status(200).json(result);
     }catch(error){
 
         console.log(error);
