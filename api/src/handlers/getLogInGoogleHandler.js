@@ -15,12 +15,15 @@ const getLogInHandler = {
   }),
   loginSuccess: (req, res, next) => {
     if (!req.user) res.redirect('/auth/callback/failure');
+    console.log(req.user);
     //res.send('Welcome ' + req.user.email);
     const dataUser = req.user;
-    const { displayName, email } = req.user;
+    const { id, displayName, email, profilePict, photos } = req.user;
     const frontUser = {
+      id: id,
       name: displayName,
       email: email,
+      profilePict: photos[0],
     };
     //console.log(dataUser);
     res.send(`
@@ -39,7 +42,7 @@ const getLogInHandler = {
         // Hacer cualquier otra acción necesaria después de agregar el usuario
       })
       .catch((error) => {
-        console.error('Error al verificar y crear el usuario:', error);
+        console.error('ALERTA:', error);
         // Manejar el error de alguna manera adecuada
       });
   },
