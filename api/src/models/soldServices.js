@@ -1,36 +1,24 @@
+// En el archivo models/SaleService.js
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('Sale', {
+  sequelize.define('SoldService', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-
-    buyer_id: {
+    sale_Id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    price: {
+    service_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    quantity: {
+    seller_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    payment_id: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    status: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    merchant_order_id: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
   });
 };

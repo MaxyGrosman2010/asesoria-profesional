@@ -1,13 +1,13 @@
 const { Sequelize } = require('sequelize');
-const { Sale, UserSale, User, Service, TypeService } = require('../db');
+const { Sale, SoldService, User, Service, TypeService } = require('../db');
 const mercadopago = require('../controllers/mercadopagoController');
 
 let datosBody = {};
 
 function createPreference(req, res) {
-  const { description, price, quantity, seller_id, buyer_id, service_id } =
+  const { description, price, quantity, seller_id, buyer_id, service_ids } =
     req.body;
-  datosBody = { seller_id, buyer_id, service_id, price, quantity };
+  datosBody = { seller_id, buyer_id, service_ids, price, quantity };
   mercadopago
     .createPreference(description, price, quantity)
     .then((preferenceId) => {
@@ -30,7 +30,7 @@ function getFeedback(req, res) {
 async function getFeedback(req, res) {
   try {
     const { payment_id, status, merchant_order_id } = req.query;
-    const { seller_id, buyer_id, service_id, price, quantity } = datosBody;
+    const { seller_id, buyer_id, service_ids, price, quantity } = datosBody;
 
     const paymentData = {
       payment_id,
@@ -38,21 +38,31 @@ async function getFeedback(req, res) {
       merchant_order_id,
       seller_id,
       buyer_id,
-      service_id,
       price,
       quantity,
     };
 
     // Verifica si el comprador existe antes de crear la venta
-    const buyer = await User.findOne({ where: { id: buyer_id } });
+    /*const buyer = await User.findOne({ where: { id: buyer_id } });
 
     if (!buyer) {
       console.error('Buyer not found');
       res.status(404).send('Buyer not found');
       return;
-    }
+    }*/
 
     const newSale = await Sale.create(paymentData);
+
+    for (const serviceData of service_ids) {
+      const { service_id, seller_id } = serviceData;
+      const service = await Service.findOne({ where: { id: service_id } });
+
+      const soldService = await SoldService.create({
+        saleId: newSale.id,
+        serviceId: service_id,
+        seller_id: seller_id,
+      });
+    }
 
     res.status(200).send(`Feedback received and processed successfully.`);
   } catch (error) {

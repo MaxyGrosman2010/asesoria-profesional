@@ -17,12 +17,12 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     cellPhone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     profilePict: {
       type: DataTypes.STRING,

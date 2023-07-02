@@ -4,7 +4,7 @@ const loadBackend = require('./src/middleware/loadBackend.js');
 
 conn.sync({ alter: true }).then(async () => {
   //conn.sync({ force: true }).then(async () => {
-  //bdd se reinicia con el server
+  //bdd se reinicia con el server↑↑↑
 
   await loadBackend();
 
