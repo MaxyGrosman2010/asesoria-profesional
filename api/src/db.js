@@ -34,15 +34,22 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Sale, User, Service, TypeService } = sequelize.models;
+const { Sale, User, Service, TypeService, SoldService } = sequelize.models;
 
 //!RELACIONES DE VENTAS
-Sale.belongsTo(User, { foreignKey: 'seller_id' });
-User.hasMany(Sale, { as: 'seller', foreignKey: 'seller_id' });
+Sale.belongsTo(User, { as: 'seller', foreignKey: 'seller_id' });
+Sale.belongsTo(User, { as: 'buyer', foreignKey: 'buyer_id' });
+Sale.belongsToMany(Service, { through: SoldService, foreignKey: 'sale_Id' });
+Service.belongsToMany(Sale, { through: SoldService, foreignKey: 'service_id' });
+
+SoldService.belongsTo(User, { foreignKey: 'seller_id' });
+User.hasMany(SoldService, { foreignKey: 'seller_id' });
+
 Sale.belongsTo(User, { foreignKey: 'buyer_id' });
 User.hasMany(Sale, { as: 'buyer', foreignKey: 'buyer_id' });
-Sale.belongsTo(Service, { foreignKey: 'service_id' });
-Service.hasMany(Sale);
+// Relación entre Sale y Service a través de SaleService
+Sale.belongsToMany(Service, { through: SoldService, foreignKey: 'sale_Id' });
+Service.belongsToMany(Sale, { through: SoldService, foreignKey: 'serviceId' });
 
 Service.belongsTo(User, { foreignKey: 'user_id' });
 User.hasMany(Service, { foreignKey: 'user_id' });

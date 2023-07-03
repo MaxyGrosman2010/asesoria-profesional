@@ -27,8 +27,9 @@ function createPreference(description, price, quantity) {
     mercadopago.preferences
       .create(preference)
       .then(function (response) {
-        resolve(response.body.id);
-        //console.log(response);
+        resolve(response.body.init_point);
+        //resolve(response.body.id);
+        console.log(response);
       })
       .catch(function (error) {
         reject(error);
