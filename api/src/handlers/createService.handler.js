@@ -40,7 +40,7 @@ const createService = async (req, res) => {
 
     await linkTypeserviceService(existTypeService, newService);
 
-    const result = await linkServiceUser(existUser, newService);
+    await linkServiceUser(existUser, newService);
 
     sendEmailNotification(SERVICE_CREATION, email);
 
