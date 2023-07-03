@@ -10,6 +10,7 @@ const tokenCreated = (user, shhh) => {
         id: user.id,
         email: user.email,
         password: user.password,
+        name: user.name
       },
       shhh,
       { expiresIn }

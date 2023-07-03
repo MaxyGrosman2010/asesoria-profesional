@@ -4,6 +4,6 @@ const validateSingIn = require("../middleware/validateSingIn");
 
 const router = Router();
 
-router.post("/", validateSingIn, singInHandler);
+router.post("/", singInHandler);
 
 module.exports = router;

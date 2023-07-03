@@ -5,14 +5,14 @@ const expiresIn = 60 * 60 * 24 * 30;
 
 const singInHandler = async (req, res) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) throw new Error(errors.throw());
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) throw new Error(errors.throw());
 
     const tokenReceived = await singInController(req.body);
 
     if (tokenReceived.error) return res.status(401).json(tokenReceived);
     
-    console.log(tokenReceived);
+    console.log(tokenReceived.token);
 
     return (
       res
@@ -24,8 +24,9 @@ const singInHandler = async (req, res) => {
         // })
         .json({
           status: "inicio de sesion exitoso",
-          token: tokenReceived,
+          token: tokenReceived.token,
           expires: new Date(Date.now() + expiresIn * 1000),
+          name: tokenReceived.name,
         })
     );
   } catch (error) {

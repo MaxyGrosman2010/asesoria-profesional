@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
     let token = req.headers.authorization;
 
 
-    //if (!token) throw new Error();
+    //if (!token) throw new Error(); 
 
     token = token.split("Bearer").pop().trim();
     
