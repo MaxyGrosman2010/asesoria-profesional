@@ -14,12 +14,12 @@ const createService = async (req, res) => {
     if (!errors.isEmpty()) throw new Error(errors.throw());
 
     const {
-      // idUser = req.id,
+      idUser = req.id,
       name,
       typeService,
       price,
       description,
-      // email = req.email,
+      email = req.email,
     } = req.body;
 
     //const existUser = await findUserById(idUser);
