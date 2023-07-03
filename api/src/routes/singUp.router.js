@@ -6,6 +6,6 @@ const { uploadSingUp } = require("../config/multer.config");
 
 const router = Router();
 
-router.post("/", uploadSingUp, singUp);
+router.post("/",validateSingUp, singUp);
 
 module.exports = router;

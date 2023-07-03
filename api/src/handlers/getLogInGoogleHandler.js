@@ -1,6 +1,7 @@
 const passport = require('passport');
 require('../middleware/passport');
 const loginController = require('../controllers/getLogInControllerGoogle');
+const { SECRET_KEY } = process.env;
 
 const getLogInHandler = {
   getLogin: (req, res) => {
@@ -14,7 +15,7 @@ const getLogInHandler = {
     failureRedirect: '/auth/callback/failure',
   }),
   loginSuccess: (req, res, next) => {
-    if (!req.user) res.redirect('/auth/callback/failure');
+    if (!req.user) res.redirect("/auth/callback/failure");
     console.log(req.user);
     //res.send('Welcome ' + req.user.email);
     const dataUser = req.user;
@@ -25,24 +26,33 @@ const getLogInHandler = {
       email: email,
       profilePict: photos[0],
     };
+
+    //Creamos el token
+    const token = tokenCreated(user, SECRET_KEY);
+
     //console.log(dataUser);
-    res.send(`
+    res
+      .send(
+        `
     <script>
       window.opener.postMessage(${JSON.stringify(
         frontUser
       )}, 'http://localhost:5173');
       window.close();
     </script>
-  `);
+  `
+      )
+      .status(200)
+      .json({ token: token });
 
     loginController
       .loginController(dataUser)
       .then((newUser) => {
-        console.log('Nuevo usuario agregado:', newUser);
+        console.log("Nuevo usuario agregado:", newUser);
         // Hacer cualquier otra acción necesaria después de agregar el usuario
       })
       .catch((error) => {
-        console.error('ALERTA:', error);
+        console.error("ALERTA:", error);
         // Manejar el error de alguna manera adecuada
       });
   },
