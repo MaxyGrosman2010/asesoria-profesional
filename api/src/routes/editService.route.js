@@ -3,7 +3,8 @@ const router = Router();
 const editService = require("../handlers/editService.handler");
 const { uploadCreateService } = require("../config/multer.config");
 const verifyToken = require('../middleware/verifyToken');
+const validateService = require('../middleware/validateService')
 
-router.put("/", verifyToken, uploadCreateService, editService);
+router.put("/", verifyToken, uploadCreateService, validateService, editService);
 
 module.exports = router;

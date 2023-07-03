@@ -11,14 +11,17 @@ const getServiceById = async(req, res) => {
 
         const service = await serviceById(idService);
 
-        const {id, name, price, description, files, TypeServices} = service;
+        const {id, name, price, description, files, TypeServices, user_id} = service;
         const {type} = TypeServices[0];
-        const result = {id, name, price, description, files, typeService: type};
+        const result = {id, name, price, description, files, type, user_id};
 
         res.status(200).json(result);
+        
     }catch(error){
-        res.status(422).json({error: "The id wasn't send properly"});
-    }
+
+        console.log(error);
+        res.status(422).json(error);
+    };
 };
 
 module.exports = getServiceById;
