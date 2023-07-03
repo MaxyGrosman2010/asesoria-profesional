@@ -2,7 +2,7 @@ const findUserById = require('../controllers/findUserById.controller');
 
 const getUserById = async(req, res) => {
     try{
-        const {id} = req.params;
+        const {id} = req.id;
 
         const existUser = await findUserById(id);
 
