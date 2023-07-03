@@ -5,11 +5,14 @@ const mercadopago = require('../controllers/mercadopagoController');
 let datosBody = {};
 
 function createPreference(req, res) {
-  const { description, price, quantity, seller_id, buyer_id, service_ids } =
+  /* const { description, price, quantity, seller_id, buyer_id, service_ids } =
     req.body;
   datosBody = { seller_id, buyer_id, service_ids, price, quantity };
+ */
+  const body = req.body[0];
   mercadopago
-    .createPreference(description, price, quantity)
+    //.createPreference(description, price, quantity)
+    .createPreference(body.name, body.price, body.quantity, body.description)
     .then((preferenceId) => {
       res.json({ id: preferenceId });
       //console.log(`linea 15`, datosBody);
