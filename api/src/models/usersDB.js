@@ -33,5 +33,10 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: false,
     },
+    isSuperAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+    }
   });
 };
