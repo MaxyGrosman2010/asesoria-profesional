@@ -28,7 +28,7 @@ function createPreference(description, price, quantity) {
       .create(preference)
       .then(function (response) {
         resolve(response.body.id);
-        console.log(response);
+        //console.log(response);
       })
       .catch(function (error) {
         reject(error);
