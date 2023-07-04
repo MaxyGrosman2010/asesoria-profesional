@@ -16,21 +16,18 @@ const singInHandler = async (req, res) => {
     
     console.log(tokenReceived);
 
-    return (
-      res
-        .status(200)
+    return (res.status(200)
         // .cookie("token", tokenReceived, {
         //   httpOnly: true,
         //   secure: !(MODE === "Developer"),
         //   expires: new Date(Date.now() + expiresIn * 1000),
         // })
         .json({
-          status: "inicio de sesion exitoso",
-          token: tokenReceived.token,
+          status: "inicio de sesion exitoso", 
+          token: tokenReceived.token, 
           expires: new Date(Date.now() + expiresIn * 1000),
-          nameUser: tokenReceived.nameUser,
-        })
-    );
+          nameUser: tokenReceived.nameUser, 
+          profilePict: tokenReceived.profilePict}));
   } catch (error) {
     console.log(error);
     return res.status(401).json({

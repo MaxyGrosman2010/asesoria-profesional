@@ -5,10 +5,7 @@ const sendEmailNotification = require('../utils/senderMail');
 
 const singUpController = async (req, file, typeNotification) => {
   try {
-    const { name, password, cellPhone, email } = req;
-
-    //subimos la imagen a firebase y obtenemos su URL
-    const uploadImage = await firebaseUploader(file);
+    const {name, password, email, profilePict} = req;
 
     // Verificamos si el email ya existe en la base de datos
     const existingUser = await User.findOne({ where: { email } });
@@ -33,6 +30,7 @@ const singUpController = async (req, file, typeNotification) => {
       name,
       password: passwordSinUp,
       email,
+      profilePict
     });
     await newUser.save();
 
