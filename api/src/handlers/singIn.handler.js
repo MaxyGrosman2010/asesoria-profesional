@@ -9,7 +9,9 @@ const singInHandler = async (req, res) => {
     if (!errors.isEmpty()) throw new Error(errors.throw());
 
     const tokenReceived = await singInController(req.body);
-
+    console.log(tokenReceived);
+   // const nameReceived = await singInController(req.body).nameUser;
+    
     if (tokenReceived.error) return res.status(401).json(tokenReceived);
     
     console.log(tokenReceived);
@@ -24,8 +26,9 @@ const singInHandler = async (req, res) => {
         // })
         .json({
           status: "inicio de sesion exitoso",
-          token: tokenReceived,
+          token: tokenReceived.token,
           expires: new Date(Date.now() + expiresIn * 1000),
+          nameUser: tokenReceived.nameUser,
         })
     );
   } catch (error) {

@@ -18,8 +18,10 @@ const singInController = async (req) => {
 
     //Creamos el token
     const token = tokenCreated(user, SECRET_KEY);
+    //Extaemos el nombre del usuario
+    const nameUser = user.name;
     //const refreshedToken = refreshToken(newUser, SECRET_KEY);
-    return token;
+    return { token, nameUser };
   } catch (error) {
     console.log(error);
   }
