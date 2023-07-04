@@ -17,6 +17,6 @@ const updateUser = async(id, name, email, password, cellPhone, file) => {
     }, {where: {id: id}});
 
     return user;
-}
+};
 
 module.exports = updateUser;
