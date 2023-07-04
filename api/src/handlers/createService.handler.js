@@ -32,13 +32,7 @@ const createService = async (req, res) => {
 
     const existTypeService = await findTypeService(typeService);
 
-    const newService = await createServiceController(
-      user_id,
-      name,
-      price,
-      description,
-      req.file
-    );
+    const newService = await createServiceController(user_id, name, price, description, req.file);
 
     await linkTypeserviceService(existTypeService, newService);
 

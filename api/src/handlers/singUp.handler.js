@@ -9,7 +9,7 @@ const singUp = async (req, res) => {
 
     if (!errors.isEmpty()) throw new Error(errors.throw());
    // console.log(req.file);
-    const siningUp = await singUpController(req.body, req.file, USER_CREATION);
+    const siningUp = await singUpController(req.body, USER_CREATION);
 
     if (siningUp?.error) {
       //console.log(siningUp);
