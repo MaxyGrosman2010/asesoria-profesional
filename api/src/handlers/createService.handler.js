@@ -39,7 +39,7 @@ const createService = async (req, res) => {
 
     sendEmailNotification(SERVICE_CREATION, email);
 
-    res.status(200).json({ message: 'servicio creado con exito' });
+    return res.status(200).json({ message: 'servicio creado con exito' });
   } catch (error) {
 
     console.log(error);

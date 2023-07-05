@@ -9,12 +9,12 @@ const singInHandler = async (req, res) => {
     if (!errors.isEmpty()) throw new Error(errors.throw());
 
     const tokenReceived = await singInController(req.body);
-    console.log(tokenReceived);
+
    // const nameReceived = await singInController(req.body).nameUser;
     
     if (tokenReceived.error) return res.status(401).json(tokenReceived);
-    
-    console.log(tokenReceived);
+
+    console.log(tokenReceived, 'token')
 
     return (res.status(200)
         // .cookie("token", tokenReceived, {
@@ -26,7 +26,7 @@ const singInHandler = async (req, res) => {
           status: "inicio de sesion exitoso", 
           token: tokenReceived.token, 
           expires: new Date(Date.now() + expiresIn * 1000),
-          nameUser: tokenReceived.nameUser, 
+          name: tokenReceived.name, 
           profilePict: tokenReceived.profilePict}));
   } catch (error) {
     console.log(error);
@@ -36,4 +36,4 @@ const singInHandler = async (req, res) => {
   }
 };
 
-module.exports = { singInHandler }; 
+module.exports = { singInHandler };

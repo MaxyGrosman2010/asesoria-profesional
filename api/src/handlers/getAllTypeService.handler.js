@@ -4,7 +4,7 @@ const getAllTypeService = async(req, res) => {
     try{
         const services = await allTypeServices();
 
-        res.status(200).json(services);
+        return res.status(200).json(services);
     }catch(error){
         console.log(error);
         res.status(404).json(error);

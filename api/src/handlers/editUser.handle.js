@@ -13,7 +13,7 @@ const userEdit = async(req, res) => {
             profilePict: userUpdate.profilePict
         };
 
-        res.status(200).json(response);
+        return res.status(200).json(response);
     }catch(error){
         
         console.log(error);
