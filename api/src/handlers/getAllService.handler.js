@@ -11,7 +11,7 @@ const getAllService = async (req, res) => {
       return { id, name, price, description, files, user_id, typeService: type };
     });
 
-    res.status(200).json(result);
+    return res.status(200).json(result);
   }catch(error){
     console.log(error);
     res.status(404).json(error);

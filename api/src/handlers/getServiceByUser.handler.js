@@ -18,7 +18,7 @@ const getServiceByUserId = async(req, res) => {
             return result;
         });
 
-        res.status(200).json(services);
+        return res.status(200).json(services);
     }catch(error){
         
         console.log(error);

@@ -22,7 +22,7 @@ const singInHandler = async (req, res) => {
           status: "inicio de sesion exitoso",
           token: tokenReceived.token,
           expires: new Date(Date.now() + tokenReceived.expireIn * 1000),
-          nameUser: tokenReceived.nameUser,
+          name: tokenReceived.nameUser,
           profilePict: tokenReceived.profilePict,
         })
     );
@@ -34,4 +34,5 @@ const singInHandler = async (req, res) => {
   }
 };
 
-module.exports = { singInHandler }; 
+
+module.exports = { singInHandler };

@@ -5,7 +5,6 @@ const { validationResult } = require('express-validator');
 const findUserById = require('../controllers/findUserById.controller');
 const linkServiceUser = require('../controllers/linkServiceUser.controller');
 const sendEmailNotification = require('../utils/senderMail');
-const { User } = require('../db');
 const { SERVICE_CREATION } = process.env;
 
 const createService = async (req, res) => {
@@ -15,7 +14,7 @@ const createService = async (req, res) => {
     if (!errors.isEmpty()) throw new Error(errors.throw());
 
     const {
-      user_id = req.User_id,
+      user_id = req.id,
       name,
       typeService,
       price,
@@ -40,11 +39,13 @@ const createService = async (req, res) => {
 
     sendEmailNotification(SERVICE_CREATION, email);
 
-    res.status(200).json({ message: 'servicio creado con exito' });
+    return res.status(200).json({ message: 'servicio creado con exito' });
   } catch (error) {
+
     console.log(error);
     res.status(422).json(error);
-  }
+
+  };
 };
 
 module.exports = createService;

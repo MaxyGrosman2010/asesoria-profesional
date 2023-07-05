@@ -21,7 +21,7 @@ const editService = async(req, res) => {
             typeService: type
         };
 
-        res.status(200).json(result);
+        return res.status(200).json(result);
     }catch(error){
 
         console.log(error);

@@ -6,7 +6,14 @@ const userEdit = async(req, res) => {
 
         const userUpdate = await updateUser(req.id, name, req.email, password, cellPhone, req.file);
 
-        res.status(200).json(userUpdate);
+        let response = {
+            name: userUpdate.name,
+            email: userUpdate.email,
+            cellPhone: userUpdate.cellPhone,
+            profilePict: userUpdate.profilePict
+        };
+
+        return res.status(200).json(response);
     }catch(error){
         
         console.log(error);
