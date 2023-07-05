@@ -29,7 +29,7 @@ function createPreference(description, price, quantity) {
       .then(function (response) {
         resolve(response.body.init_point);
         //resolve(response.body.id);
-        console.log(response);
+        // console.log(response);
       })
       .catch(function (error) {
         reject(error);

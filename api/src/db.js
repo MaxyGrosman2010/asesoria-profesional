@@ -46,12 +46,12 @@ User.hasMany(SoldService, { foreignKey: 'seller_id' });
 Sale.belongsTo(User, { foreignKey: 'buyer_id' });
 User.hasMany(Sale, { as: 'buyer', foreignKey: 'buyer_id' });
 // Relación entre Sale y Service a través de SaleService
-Sale.belongsToMany(Service, { through: SoldService, foreignKey: 'sale_Id' });
+Sale.belongsToMany(Service, { through: SoldService, foreignKey: 'sale_id' });
 Service.belongsToMany(Sale, { through: SoldService, foreignKey: 'service_id' });
 
 //! REVISAR
-Sale.hasMany(SoldService, { foreignKey: 'sale_Id' });
-SoldService.belongsTo(Sale, { foreignKey: 'sale_Id' });
+Sale.hasMany(SoldService, { foreignKey: 'sale_id' });
+SoldService.belongsTo(Sale, { foreignKey: 'sale_id' });
 
 SoldService.belongsTo(Service, { foreignKey: 'service_id' });
 Service.hasMany(SoldService, { foreignKey: 'service_id' });
