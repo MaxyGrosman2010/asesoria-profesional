@@ -6,7 +6,6 @@ const { SECRET_KEY } = process.env;
 const singInController = async (req) => {
   try {
     const { email, password } = req;
-    console.log(password);
     //Buscamos el usuario en la BBDD
     const user = await User.findOne({ where: { email } });
 
@@ -19,10 +18,9 @@ const singInController = async (req) => {
     //Creamos el token
     const token = tokenCreated(user, SECRET_KEY);
     //Extaemos el nombre del usuario
-    const name = user.name;
-    const profilePict = user.profilePict;
+    const nameUser = user.name;
     //const refreshedToken = refreshToken(newUser, SECRET_KEY);
-    return { token, name, profilePict};
+    return { token: token.token, nameUser, expireIn: token.expiresIn };
   } catch (error) {
     console.log(error);
   }

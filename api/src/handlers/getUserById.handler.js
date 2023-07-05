@@ -7,8 +7,6 @@ const getUserById = async(req, res) => {
 
         if(!existUser) return res.status(422).json({message: "This user doesn't exist"});
 
-        console.log(existUser);
-
         const response = {
             name: existUser.name,
             cellphone: existUser.cellphone,

@@ -1,7 +1,5 @@
 const { validationResult } = require("express-validator");
 const  singInController  = require("../controllers/singIn.controller");
-//const { MODE } = process.env;
-const expiresIn = 60 * 60 * 24 * 30;
 
 const singInHandler = async (req, res) => {
   try {
@@ -9,25 +7,25 @@ const singInHandler = async (req, res) => {
     if (!errors.isEmpty()) throw new Error(errors.throw());
 
     const tokenReceived = await singInController(req.body);
-
    // const nameReceived = await singInController(req.body).nameUser;
-    
     if (tokenReceived.error) return res.status(401).json(tokenReceived);
-
-    console.log(tokenReceived, 'token')
-
-    return (res.status(200)
+        
+    return (
+      res
+        .status(200)
         // .cookie("token", tokenReceived, {
         //   httpOnly: true,
         //   secure: !(MODE === "Developer"),
         //   expires: new Date(Date.now() + expiresIn * 1000),
         // })
         .json({
-          status: "inicio de sesion exitoso", 
-          token: tokenReceived.token, 
-          expires: new Date(Date.now() + expiresIn * 1000),
-          name: tokenReceived.name, 
-          profilePict: tokenReceived.profilePict}));
+          status: "inicio de sesion exitoso",
+          token: tokenReceived.token,
+          expires: new Date(Date.now() + tokenReceived.expireIn * 1000),
+          name: tokenReceived.nameUser,
+          profilePict: tokenReceived.profilePict,
+        })
+    );
   } catch (error) {
     console.log(error);
     return res.status(401).json({
@@ -35,5 +33,6 @@ const singInHandler = async (req, res) => {
     });
   }
 };
+
 
 module.exports = { singInHandler };
