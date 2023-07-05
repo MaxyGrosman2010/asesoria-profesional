@@ -1,7 +1,7 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-let expiresIn = 60 * 15;
+let expiresIn = 1000 * 6 * 60;
 
 const tokenCreated = (user, shhh) => {
   try {
@@ -14,7 +14,7 @@ const tokenCreated = (user, shhh) => {
       shhh,
       { expiresIn }
     );
-    return token;
+    return { token, expiresIn };
   } catch (error) {
   }
 };
