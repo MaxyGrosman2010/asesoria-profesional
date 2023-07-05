@@ -41,9 +41,11 @@ const createService = async (req, res) => {
 
     res.status(200).json({ message: 'servicio creado con exito' });
   } catch (error) {
+
     console.log(error);
     res.status(422).json(error);
-  }
+
+  };
 };
 
 module.exports = createService;
