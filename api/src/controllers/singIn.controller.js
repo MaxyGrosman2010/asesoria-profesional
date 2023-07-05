@@ -6,7 +6,6 @@ const { SECRET_KEY } = process.env;
 const singInController = async (req) => {
   try {
     const { email, password } = req;
-    console.log(password);
     //Buscamos el usuario en la BBDD
     const user = await User.findOne({ where: { email } });
 

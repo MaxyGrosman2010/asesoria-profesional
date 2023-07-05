@@ -6,7 +6,14 @@ const getAllTypeServiceRouter = require('./getAllTypeService.route');
 const getAllServiceRouter = require('./getAllServices.route');
 const getServiceById = require('./getServiceById.route');
 const getServiceByName = require('./getServiceByName');
-const getLogInHandler = require('../handlers/getLogInGoogleHandler');
+const {
+  getLoginHandler,
+  authenticateHandler,
+  authCallbackHandler,
+  loginSuccessHandler,
+  loginFailureHandler,
+  getLogoutHandler,
+} = require("../handlers/getLogInGoogleHandler");
 require('../middleware/passport');
 const singUpRouter = require('./singUp.router');
 const singInRouter = require('./singIn.router');
@@ -31,12 +38,12 @@ router.use('/editService', editServiceRouter);
 router.use('/getUserById', getUserByIdRouter);
 router.use('/getServiceByUser', getServicesByUserRouter);
 //!REFERIDO A LOGIN GOOGLE
-router.get('/loginGoogle', getLogInHandler.getLogin);
-router.get('/auth', getLogInHandler.authenticate);
-router.get('/auth/callback', getLogInHandler.authCallback);
-router.get('/auth/callback/success', getLogInHandler.loginSuccess);
-router.get('/auth/callback/failure', getLogInHandler.loginFailure);
-router.post('/logout', getLogInHandler.getLogout);
+router.get("/loginGoogle", getLoginHandler);
+router.get("/auth", authenticateHandler);
+router.get("/auth/callback", authCallbackHandler);
+router.get("/auth/callback/success", loginSuccessHandler);
+router.get("/auth/callback/failure", loginFailureHandler);
+router.post("/logout", getLogoutHandler);
 //!REFERIDO A MERCADOPAGO
 router.post('/orderMP', mercadoPagoHandler.createPreference);
 router.get('/feedback', mercadoPagoHandler.getFeedback);
