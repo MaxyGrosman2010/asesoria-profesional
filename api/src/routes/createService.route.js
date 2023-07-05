@@ -7,7 +7,7 @@ const verifyToken = require('../middleware/verifyToken');
 
 router.post(
   '/',
-  /*verifyToken,*/ uploadCreateService,
+  verifyToken, uploadCreateService,
   validateCreateServices,
   createService
 );
