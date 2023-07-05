@@ -24,8 +24,14 @@ const loginSuccessHandler = async (req, res, next) => {
 
     //console.log(req.user);
     const dataUser = req.user;
-
-    const newUser = await loginController.loginController(dataUser);
+    const { id, User_id, displayName, email, photos } = req.user;
+    const frontUser = {
+      User_id: User_id,
+      idGoogle: id,
+      name: displayName,
+      email: email,
+      profilePict: photos[0],
+    };
 
     //console.log("Nuevo usuario agregado:", newUser.displayName);
     const updatedFrontUser = {
