@@ -2,13 +2,21 @@ const findUserById = require('../controllers/findUserById.controller');
 
 const getUserById = async(req, res) => {
     try{
-        const {id} = req.params;
 
-        const existUser = await findUserById(id);
+        const existUser = await findUserById(req.id);
 
         if(!existUser) return res.status(422).json({message: "This user doesn't exist"});
 
-        return res.status(200).json(existUser);
+        console.log(existUser);
+
+        const response = {
+            name: existUser.name,
+            cellphone: existUser.cellphone,
+            email: existUser.email,
+            profilePict: existUser.profilePict
+        };
+
+        return res.status(200).json(response);
     }catch(error){
         console.log(error);
         res.status(422).json(error);
