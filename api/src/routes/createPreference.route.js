@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const router = Router();
-const {createPreference} = require('./mercadoPagoHandler')
+const { createPreference } = require('./mercadoPagoHandler');
+const verifyToken = require('../middleware/verifyToken');
 
-router.post(createPreference);
+router.post('/', verifyToken, createPreference);
 
 module.exports = router;
