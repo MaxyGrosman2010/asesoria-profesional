@@ -23,6 +23,10 @@ module.exports = (sequelize) => {
       files: {
         type: DataTypes.STRING,
       },
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
     },
     { timestamps: false }
   );
