@@ -1,10 +1,14 @@
-const {User, Service} = require('../db');
+const {User, Service, TypeService} = require('../db');
 
 const findUserById = (id) => User.findByPk(id, {
     include: [
         {
             model: Service,
-            required: false,
+            include: [
+                {
+                    model: TypeService
+                }
+            ]
         }
     ]
 });
