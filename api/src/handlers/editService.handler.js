@@ -7,9 +7,9 @@ const editService = async(req, res) => {
 
         if(!errors.isEmpty()) throw new Error(errors.throw());
 
-        const {id, name, price, description} = req.body;
+        const {name, price, description} = req.body;
 
-        const updatedService = await updateService(id, name, price, description, req.file);
+        const updatedService = await updateService(req.id, name, price, description, req.file);
         const {type} = updatedService.TypeService[0];
 
         const result = {
