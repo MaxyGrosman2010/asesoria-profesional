@@ -33,6 +33,8 @@ const loginSuccessHandler = async (req, res, next) => {
       profilePict: photos[0],
     };
 
+    const newUser = await loginController.loginController(dataUser);
+
     //console.log("Nuevo usuario agregado:", newUser.displayName);
     const updatedFrontUser = {
       User_id: newUser.User_id,
