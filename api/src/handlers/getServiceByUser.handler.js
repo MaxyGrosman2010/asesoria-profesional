@@ -10,9 +10,9 @@ const getServiceByUserId = async(req, res) => {
         const {Services} = userWithService;
 
         const services = Services.map((service) => {
-            const {name, price, description, files, TypeServices} = service;
+            const {id, name, price, description, files, TypeServices} = service;
             const {type} = TypeServices[0];
-            const result = {name, price, description, files, type};
+            const result = {id, name, price, description, files, type};
 
             return result;
         });
