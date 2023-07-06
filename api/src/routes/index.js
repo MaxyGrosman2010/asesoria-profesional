@@ -36,10 +36,10 @@ router.use('/getUserById', getUserByIdRouter);
 router.use('/getServiceByUser', getServicesByUserRouter);
 //!REFERIDO A LOGIN GOOGLE
 router.use("/loginGoogle", getLoginHandlerRouter);
-router.use("/auth", authenticateHandlerRouter);
-router.use("/auth/callback", authCallbackHandlerRouter);
-router.use("/auth/callback/success", loginSuccessHandlerRouter);
-router.use("/auth/callback/failure", loginFailureHandlerRouter);
+router.use(authenticateHandlerRouter);
+router.use(authCallbackHandlerRouter);
+router.use(loginSuccessHandlerRouter);
+router.use(loginFailureHandlerRouter);
 router.use("/logout", logoutHandlerRouter)
 //!REFERIDO A MERCADOPAGO
 router.use('/orderMP', createPreferenceRouter);
