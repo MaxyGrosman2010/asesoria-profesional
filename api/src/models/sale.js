@@ -12,14 +12,11 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    price: {
+    totalAmount: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+
     payment_id: {
       type: DataTypes.STRING,
       allowNull: true,
