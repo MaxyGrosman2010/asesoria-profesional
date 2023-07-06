@@ -5,20 +5,19 @@ const getAllTypeServiceRouter = require('./getAllTypeService.route');
 const getAllServiceRouter = require('./getAllServices.route');
 const getServiceById = require('./getServiceById.route');
 const getServiceByName = require('./getServiceByName');
-const {
-  getLoginHandler,
-  authenticateHandler,
-  authCallbackHandler,
-  loginSuccessHandler,
-  loginFailureHandler,
-  getLogoutHandler,
-} = require("../handlers/getLogInGoogleHandler");
+const getLoginHandlerRouter = require('./getLoginHandler.route');
+const authenticateHandlerRouter = require('./authenticateHandler.route');
+const authCallbackHandlerRouter = require('./authCallBack.route');
+const loginSuccessHandlerRouter = require('./authCallBackSuccess.route');
+const loginFailureHandlerRouter = require('./authCallBackFailure.route');
+const logoutHandlerRouter = require('./getLogoutHandler.route');
 require('../middleware/passport');
 const singUpRouter = require('./singUp.router');
 const singInRouter = require('./singIn.router');
 const editUserRouter = require('./editUser.route');
 const editServiceRouter = require('./editService.route');
-const mercadoPagoHandler = require('./mercadoPagoHandler');
+const createPreferenceRouter = require('./createPreference.route');
+const feedbackRouter = require('./feedback.route');
 const getServicesByUserRouter = require('./getServicesByUser.route');
 const getUserByIdRouter = require('./getUserById.route')
 const router = Router();
@@ -36,14 +35,14 @@ router.use('/editService', editServiceRouter);
 router.use('/getUserById', getUserByIdRouter);
 router.use('/getServiceByUser', getServicesByUserRouter);
 //!REFERIDO A LOGIN GOOGLE
-router.get("/loginGoogle", getLoginHandler);
-router.get("/auth", authenticateHandler);
-router.get("/auth/callback", authCallbackHandler);
-router.get("/auth/callback/success", loginSuccessHandler);
-router.get("/auth/callback/failure", loginFailureHandler);
-router.post("/logout", getLogoutHandler);
+router.use("/loginGoogle", getLoginHandlerRouter);
+router.use("/auth", authenticateHandlerRouter);
+router.use("/auth/callback", authCallbackHandlerRouter);
+router.use("/auth/callback/success", loginSuccessHandlerRouter);
+router.use("/auth/callback/failure", loginFailureHandlerRouter);
+router.use("/logout", logoutHandlerRouter)
 //!REFERIDO A MERCADOPAGO
-router.post('/orderMP', mercadoPagoHandler.createPreference);
-router.get('/feedback', mercadoPagoHandler.getFeedback);
+router.use('/orderMP', createPreferenceRouter);
+router.use('/feedback', feedbackRouter);
 
 module.exports = router;
