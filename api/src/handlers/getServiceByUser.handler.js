@@ -2,18 +2,17 @@ const getUserWithServicesById = require('../controllers/getUserWithServicesById.
 
 const getServiceByUserId = async(req, res) => {
     try{
-        const {id} = req.params;
 
-        const userWithService = await getUserWithServicesById(id);
+        const userWithService = await getUserWithServicesById(req.id);
 
         if(!userWithService) return res.status(422).json({message: "Este usuario no existe"});
 
         const {Services} = userWithService;
 
         const services = Services.map((service) => {
-            const {id, name, price, description, files, TypeServices, user_id} = service;
+            const {id, name, price, description, files, TypeServices} = service;
             const {type} = TypeServices[0];
-            const result = {id, name, price, description, files, type, user_id};
+            const result = {id, name, price, description, files, type};
 
             return result;
         });

@@ -3,6 +3,6 @@ const router = Router();
 const getServiceByUser = require('../handlers/getServiceByUser.handler');
 const verifyToken = require('../middleware/verifyToken');
 
-router.get('/:id',  getServiceByUser);
+router.get('/', verifyToken, getServiceByUser);
 
 module.exports = router;
