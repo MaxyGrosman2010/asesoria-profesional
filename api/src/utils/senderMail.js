@@ -1,7 +1,11 @@
 const nodemailer = require("nodemailer");
 let { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS } = process.env;
 
-const sendEmailNotification = async (typeNotification, emailToSend) => {
+const sendEmailNotification = async (
+  typeNotification,
+  emailToSend,
+  compiledTemplate
+) => {
   try {
     const config = {
       host: EMAIL_HOST,
@@ -15,11 +19,12 @@ const sendEmailNotification = async (typeNotification, emailToSend) => {
     let message = "";
 
     if (typeNotification === "userCreation") {
+      console.log(emailToSend);
       message = {
         from: EMAIL_USER,
         to: emailToSend,
         subject: "correo de prueba",
-        text: "envio de creacion de usuario",
+        html: compiledTemplate,
       };
     } else if (typeNotification === "serviceCreation") {
       message = {
