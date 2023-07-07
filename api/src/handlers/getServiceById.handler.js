@@ -21,10 +21,20 @@ const getServiceById = async(req, res) => {
           },
         });
 
-        const {type} = TypeServices[0];
-        const result = {id, name, price, description, files, type, user_id};
+        const { type } = TypeServices[0];
+        
+        const result = {
+          id,
+          name,
+          price,
+          description,
+          files,
+          type,
+          user_id,
+          review,
+        };
 
-        return res.status(200).json({result, review});
+        return res.status(200).json([result]);
         
     }catch(error){
 
