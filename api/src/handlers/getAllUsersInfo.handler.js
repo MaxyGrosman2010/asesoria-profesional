@@ -6,14 +6,13 @@ const getAllUsersInfo = async(req, res) => {
         const existUser = await findUserById(req.id);
 
         if(!existUser) return res.status(404).json({message: "El usuario no existe"});
+        
         if(!existUser?.isSuperAdmin) return res.status(404).json({message: "No tenes la autoridad para acceder a esta informacion"});
 
         const users = await getAllUsers();
 
-        console.log(users);
-
         const response = users.map((user) => {
-            
+
             const info = {
                 id: user.id,
                 name: user.name,
