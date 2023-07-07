@@ -26,6 +26,7 @@
     "firebase": "^9.23.0",
     "firebase-admin": "^11.9.0",
     "google-auth-library": "^8.8.0",
+    "handlebars": "^4.7.7",
     "jsonwebtoken": "^9.0.0",
     "mercadopago": "^1.5.16",
     "morgan": "^1.10.0",

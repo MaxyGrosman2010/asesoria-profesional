@@ -95,3 +95,8 @@
 ###    Necesita por body:
 ###    email: string,
 ###    password: string
+
+## Post Review: http://localhost:3001/review
+###    Necesita por body:
+###    "reviewDescription": string,
+###    "idService": integer
