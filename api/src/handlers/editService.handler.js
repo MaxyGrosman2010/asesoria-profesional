@@ -4,6 +4,7 @@ const serviceById =  require('../controllers/serviceById.controller');
 
 const editService = async(req, res) => {
     try{
+        
         const errors = validationResult(req);
 
         if(!errors.isEmpty()) throw new Error(errors.throw());
@@ -28,10 +29,11 @@ const editService = async(req, res) => {
         };
 
         return res.status(200).json(result);
+
     }catch(error){
 
-        console.log(error);
         res.status(404).json(error);
+
     };
 };
 

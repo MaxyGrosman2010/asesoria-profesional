@@ -14,11 +14,12 @@ const userEdit = async(req, res) => {
         };
 
         return res.status(200).json(response);
+
     }catch(error){
         
-        console.log(error);
         res.status(404).json(error);
-    }
+        
+    };
 };
 
 module.exports = userEdit;
