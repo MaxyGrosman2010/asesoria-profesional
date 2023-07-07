@@ -22,7 +22,7 @@ const getServicesByUserRouter = require('./getServicesByUser.route');
 const getUserByIdRouter = require("./getUserById.route");
 const reviewRouter = require("./review.route");
 const getAllUsersInfoRouter = require('./getAllUsersInfo.route');
-const changeAdminPrivilagesRouter = require('./getAdminPrivilages.route');
+const changeAdminPrivilagesRouter = require('./changeAdminPrivilages.route');
 const router = Router();
 
 router.use('/service', createServiceRouter);

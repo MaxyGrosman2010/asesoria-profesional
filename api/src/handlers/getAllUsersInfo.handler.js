@@ -14,7 +14,7 @@ const getAllUsersInfo = async(req, res) => {
 
         const response = users.map((user) => {
 
-            const info = {
+            const newUser = {
                 id: user.id,
                 name: user.name,
                 email: user.email,
@@ -24,7 +24,7 @@ const getAllUsersInfo = async(req, res) => {
                 cantService: user.Services.length
             };
 
-            return info;
+            return newUser;
 
         });
 
