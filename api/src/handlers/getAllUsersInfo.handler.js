@@ -3,6 +3,7 @@ const getAllUsers = require('../controllers/allUsers.controller');
 
 const getAllUsersInfo = async(req, res) => {
     try{
+
         const existUser = await findUserById(req.id);
 
         if(!existUser) return res.status(404).json({message: "El usuario no existe"});
@@ -24,12 +25,15 @@ const getAllUsersInfo = async(req, res) => {
             };
 
             return info;
+
         });
 
         res.status(200).json(response);
+
     }catch(error){
-        console.log(error);
+
         res.status(404).json(error);
+        
     };
 };
 

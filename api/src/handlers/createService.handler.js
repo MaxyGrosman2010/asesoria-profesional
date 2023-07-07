@@ -10,6 +10,7 @@ const { SERVICE_CREATION } = process.env;
 
 const createService = async (req, res) => {
   try {
+    
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) throw new Error(errors.throw());
@@ -55,9 +56,9 @@ const createService = async (req, res) => {
     };
 
     return res.status(200).json(response);
+
   } catch (error) {
 
-    console.log(error);
     res.status(422).json(error);
 
   };
