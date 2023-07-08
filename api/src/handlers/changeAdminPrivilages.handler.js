@@ -1,4 +1,5 @@
 const findUserById = require('../controllers/findUserById.controller');
+const findUserByName = require('../controllers/findUserByName.controller');
 const updateIsAdmin = require('../controllers/updateIsAdmin.controller');
 
 const changeAdminPrivilages = async(req, res) => {
@@ -7,15 +8,15 @@ const changeAdminPrivilages = async(req, res) => {
 
         if(!existUser) return res.status(404).json({message: "El usuario no existe"});
 
-        if(!existUser.isAdmin) return res.status(404).json({message: "No posee los derechos para realizar esta accion"});
+        if(!existUser.isSuperAdmin) return res.status(404).json({message: "No posee los derechos para realizar esta accion"});
 
-        const {id} = req.body;
+        const {name} = req.body;
 
-        const update = await findUserById(id);
+        const update = await findUserByName(name);
 
         await updateIsAdmin(update);
 
-        const updated = await findUserById(id);
+        const updated = await findUserByName(name);
 
         return res.status(200).json(updated);
 

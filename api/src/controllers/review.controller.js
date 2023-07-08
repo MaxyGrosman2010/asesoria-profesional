@@ -2,10 +2,11 @@ const { Review } = require('../db');
 
 const reviewController = async (req, user_id) => {
     try {
-          const { idService, reviewDescription } = req;
+          const { idService, reviewDescription, score } = req;
 
           const newReview = await Review.create({
             description: reviewDescription,
+            score: score
           });
 
           newReview.setUser(user_id);
