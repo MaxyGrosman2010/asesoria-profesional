@@ -12,6 +12,7 @@ const getAllService = async (req, res) => {
       const type = TypeServices.length > 0 ? TypeServices[0].type : null;
 
       return { id, name, price, description, files, user_id, typeService: type };
+      
     });
 
     return res.status(200).json(result);
