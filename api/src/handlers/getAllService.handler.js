@@ -4,9 +4,7 @@ const db = require('../db');
 const getAllService = async (req, res) => {
   try{
 
-    const servicesUnfilter = await allService();
-
-    const services = servicesUnfilter.filter((service) => !service.isDeleted);
+    const services = await allService();
     
     const result = services.map((service) => {
 

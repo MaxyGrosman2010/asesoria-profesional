@@ -3,7 +3,17 @@ dotenv.config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_TABLE} = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_TABLE, DB_DEPLOY } =
+  process.env;
+
+//↓↓↓COMENTAR PARA USA LA BASE DE DATOS LOCAL, ESTO ES LA DB DEPLOYADA EN RAILWAY
+/*
+const sequelize = new Sequelize(DB_DEPLOY, {
+  logging: false,
+  native: false,
+});
+*/
+//DESCOMENTAR PARA USAR LOCAL
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_TABLE}`,
@@ -12,6 +22,7 @@ const sequelize = new Sequelize(
     native: false,
   }
 );
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -34,7 +45,8 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Sale, User, Service, TypeService, SoldService, Review } = sequelize.models;
+const { Sale, User, Service, TypeService, SoldService, Review } =
+  sequelize.models;
 
 //!RELACIONES DE VENTAS
 Sale.belongsTo(User, { as: 'seller', foreignKey: 'seller_id' });
@@ -62,13 +74,12 @@ Service.belongsToMany(TypeService, { through: 'TypesOfService' });
 TypeService.belongsToMany(Service, { through: 'TypesOfService' });
 
 //Relación uno a muchos entre Review y Servicio
-Service.hasMany(Review, { foreignKey: "service_id" });
-Review.belongsTo(Service, { foreignKey: "service_id" });
+Service.hasMany(Review, { foreignKey: 'service_id' });
+Review.belongsTo(Service, { foreignKey: 'service_id' });
 
 //Relación uno a muchos entre Review y User
-User.hasMany(Review, { foreignKey: "user_id" });
-Review.belongsTo(User, { foreignKey: "user_id" });
-
+User.hasMany(Review, { foreignKey: 'user_id' });
+Review.belongsTo(User, { foreignKey: 'user_id' });
 
 module.exports = {
   ...sequelize.models,
