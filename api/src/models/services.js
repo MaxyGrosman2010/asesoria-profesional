@@ -31,10 +31,6 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false
       },
-      userIsDeleted: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
-      }
     },
     { timestamps: false }
   );
