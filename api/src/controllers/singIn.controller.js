@@ -12,6 +12,8 @@ const singInController = async (req) => {
     //Verificamos si el usuario existe y si la contraseña es correcta
     if (!user) return { error: "Credenciales invalidas" };
 
+    if(user?.isDeleted) return { error: "Este usuario fue baneado o eliminado"};
+
     const passCompare = await bcrypt.compare(password, user.password);
     if (!passCompare) return { error: "Credenciales invalidas" };
 

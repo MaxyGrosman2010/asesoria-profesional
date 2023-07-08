@@ -14,6 +14,9 @@ module.exports = (sequelize) => {
       description: {
         type: DataTypes.STRING,
       },
+      score: {
+        type: DataTypes.INTEGER
+      }
     },
     { timestamps: false }
   );
