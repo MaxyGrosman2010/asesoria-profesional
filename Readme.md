@@ -16,10 +16,8 @@
 ###    description: TEXT,
 ###    files: archivo de imagen a convertir,
 ###    idUser: Enviado por el JsonWebToken
-###    Para trabajar sin el idUser, si no tiene los repositorios actualizados hacer lo siguiente:
-###    Fede tiene las lineas comentadas para trabajar de esta forma
-###    En caso de tener el Back al dia, comentar las siguiente lineas:
-###    Comentar las lineas 25, 27 a 30, 43 del archivo createService.handler.js
+
+
 
 ## Get allService: http://localhost:3001/allService
 ###    Envia un array de objetos con las siguientes propiedades:
@@ -100,3 +98,30 @@
 ###    Necesita por body:
 ###    "reviewDescription": string,
 ###    "idService": integer
+
+## Get All Users info: http://localhost:3001/allUsers/
+###    Necesita token y isAdmin = true
+###    Devuelve todos los usuario en un array de objectos que tiene las siguiente propiedades:
+###    name: String
+###    email: String
+###    profilePict: String, url
+###    isAdmin: Boolean
+###    isSuperAdmin: Boolean
+###    cantService: int, la cantidad de servicios que tiene el usuario
+###    isDeleted: Boolean, si esta bajo borrado logico
+
+## Put Manage Admin Privilages http://localhost:3001/changeAdmin/
+###    Necesita token y isAdmin = true
+###    Da o quita privilegios de admin al usuario, mediante el cambio del estado isAdmin
+###    Devuelve el Usuario actualizado con su estado de isAdmin la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
+
+
+## Put Manage User Logical delete http://localhost:3001/deleteService/
+###    Necesita token y isAdmin = true
+###    Elimina logicamente al usuario, mediante el cambio del estado isDeleted, tras realizar esto el usuario pierde el accceso al sitio
+###    Devuelve el Usuario actualizado con su estado de isDeleted la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
+
+## Put Manage Service Logical delete http://localhost:3001/deleteService/
+###    Necesita token del usuario que creo este servico o ser un admin(isAdmin = true)
+###    Elimina logicamente al servicio, mediante el cambio del estado isDeleted, tras realizar esto el servicio no deberia deberia aparecer en el sitio(Terminar de aplicar)
+###    Devuelve el servicio actualizado con su estado de isDeleted la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion

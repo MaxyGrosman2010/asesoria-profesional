@@ -4,34 +4,35 @@ const { Review } = require('../db');
 
 
 const getServiceById = async(req, res) => {
-  try{
-      
-    const errors = validationResult(req);
+    try{
+        const errors = validationResult(req);
 
-    if(!errors.isEmpty()) throw new Error(errors.throw());
+        if(!errors.isEmpty()) throw new Error(errors.throw());
 
-    const {idService} = req.params;
+        const {idService} = req.params;
 
-    const service = await serviceById(idService);
+        const service = await serviceById(idService);
 
-    const { id, name, price, description, files, TypeServices, user_id } = service;
+        if(service.isDeleted) return res.status(404).json({message: "The searched service doesn't exist"});
+
+        const { id, name, price, description, files, TypeServices, user_id } = service;
         
-    const review = await Review.findAll({
-      where: {
-        service_id: id,
-      },
-    });
+        const review = await Review.findAll({
+          where: {
+            service_id: id,
+          },
+        });
 
-    const {type} = TypeServices[0];
-    const result = {id, name, price, description, files, type, user_id, review};
+        const {type} = TypeServices[0];
+        const result = {id, name, price, description, files, type, user_id, review};
 
-    return res.status(200).json(result);
+        return res.status(200).json(result);
         
-  }catch(error){
+    }catch(error){
 
-    res.status(422).json(error);
-      
-  };
+        console.log(error);
+        res.status(422).json(error);
+    };
 };
 
 module.exports = getServiceById;
