@@ -37,14 +37,15 @@ const loginSuccessHandler = async (req, res, next) => {
 
     //console.log("Nuevo usuario agregado:", newUser.displayName);
     const updatedFrontUser = {
-      User_id: newUser.User_id,
-      idGoogle: newUser.id,
-      name: newUser.displayName,
-      email: newUser.email,
-      profilePict: newUser.picture,
+      User_id: newUser.updatedDataUser.User_id,
+      idGoogle: newUser.updatedDataUser.id,
+      name: newUser.updatedDataUser.displayName,
+      email: newUser.updatedDataUser.email,
+      profilePict: newUser.updatedDataUser.picture,
     };
-   console.log(newUser.token.token);
-    res.cookie('token', newUser.token.token);
+
+    console.log(newUser.token.token);
+    res.cookie("token", newUser.token.token);
     res.send(`
       <script>
         window.opener.postMessage(${JSON.stringify(
