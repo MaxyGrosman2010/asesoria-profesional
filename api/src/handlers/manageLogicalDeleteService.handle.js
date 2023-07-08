@@ -2,19 +2,24 @@ const findUserById = require('../controllers/findUserById.controller');
 const findServiceById = require('../controllers/serviceById.controller');
 const manageLogicalDeleteService = require('../controllers/manageLogicalDeleteService.controller');
 
-const logicalDeleteUser = async(req, res) => {
+const logicalDeleteService = async(req, res) => {
 
     try{
 
-        const admin = await findUserById(req.id);
+        const user = await findUserById(req.id);
 
-        if(!admin) return res.status(404).json({message: "El usuario no existe"});
-
-        if(!admin?.isAdmin) return res.status(404).json({message: "No posee los derechos para realizar esta accion"});
+        if(!user) return res.status(404).json({message: "El usuario no existe"});
 
         const {id} = req.body;
 
         const serviceToDelete = await findServiceById(id);
+
+        if(serviceToDelete.user_id !== req.id || !user.isAdmin) 
+            return res.status(404).json({
+
+                message: "No posee lo derechos para eliminar este servico"
+                
+            });
 
         await manageLogicalDeleteService(serviceToDelete);
 
@@ -42,4 +47,4 @@ const logicalDeleteUser = async(req, res) => {
     };
 };
 
-module.exports = logicalDeleteUser;
+module.exports = logicalDeleteService;
