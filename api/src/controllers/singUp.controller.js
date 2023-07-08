@@ -1,17 +1,19 @@
-const { User } = require('../db.js');
-const hashPassword = require('../utils/hashPassword.js');
-const firebaseUploader = require('../utils/firebaseUploader.js');
-const sendEmailNotification = require('../utils/senderMail');
+const { User } = require("../db.js");
+const hashPassword = require("../utils/hashPassword.js");
+const template = require("../utils/templateCreation");
+const sendEmailNotification = require("../utils/senderMail");
+const fs = require("fs");
+const path = require("path");
 
-const singUpController = async (req, file, typeNotification) => {
+const singUpController = async (req, typeNotification) => {
   try {
-    const {name, password, email, profilePict} = req;
+    const { name, password, email, profilePict } = req;
 
     // Verificamos si el email ya existe en la base de datos
     const existingUser = await User.findOne({ where: { email } });
 
     if (existingUser) {
-      return { error: 'El email ya está registrado' };
+      return { error: "El email ya está registrado" };
     }
 
     //Hasheamos la password
@@ -30,11 +32,29 @@ const singUpController = async (req, file, typeNotification) => {
       name,
       password: passwordSinUp,
       email,
-      profilePict
+      profilePict,
     });
+
     await newUser.save();
 
-    return sendEmailNotification(typeNotification, newUser.email);
+    const filePath = path.join(
+      __dirname,
+      "..",
+      "views",
+      "creationUserNotification.hbs"
+    );
+
+    const templateUserCreation = fs.readFileSync(filePath, "utf-8");
+
+
+    const compiledTemplate = template(templateUserCreation, { name: name });
+
+
+    return sendEmailNotification(
+      typeNotification,
+      newUser.email,
+      compiledTemplate
+    );
   } catch (error) {
     console.log(error);
   }

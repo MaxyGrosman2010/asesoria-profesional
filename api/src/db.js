@@ -45,7 +45,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Sale, User, Service, TypeService, SoldService } = sequelize.models;
+const { Sale, User, Service, TypeService, SoldService, Review } = sequelize.models;
 
 //!RELACIONES DE VENTAS
 Sale.belongsTo(User, { as: 'seller', foreignKey: 'seller_id' });
@@ -71,6 +71,15 @@ User.hasMany(Service, { foreignKey: 'user_id' });
 
 Service.belongsToMany(TypeService, { through: 'TypesOfService' });
 TypeService.belongsToMany(Service, { through: 'TypesOfService' });
+
+//Relación uno a muchos entre Review y Servicio
+Service.hasMany(Review, { foreignKey: "service_id" });
+Review.belongsTo(Service, { foreignKey: "service_id" });
+
+//Relación uno a muchos entre Review y User
+User.hasMany(Review, { foreignKey: "user_id" });
+Review.belongsTo(User, { foreignKey: "user_id" });
+
 
 module.exports = {
   ...sequelize.models,

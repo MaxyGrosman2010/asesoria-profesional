@@ -1,17 +1,24 @@
 const updateService = require('../controllers/updateService.controller');
 const {validationResult} = require('express-validator');
+const serviceById =  require('../controllers/serviceById.controller');
 
 const editService = async(req, res) => {
     try{
+        
         const errors = validationResult(req);
 
         if(!errors.isEmpty()) throw new Error(errors.throw());
 
-        const {name, price, description} = req.body;
+        const {id ,name, price, description} = req.body;
 
-        const updatedService = await updateService(req.id, name, price, description, req.file);
-        const {type} = updatedService.TypeService[0];
+        await updateService(id, name, price, description, req.file);
 
+        const updatedService = await serviceById(id);
+
+        const {TypeServices} = updatedService;
+
+        const {type} = TypeServices[0];
+ 
         const result = {
             id: updatedService.id,
             name: updatedService.name,
@@ -22,10 +29,11 @@ const editService = async(req, res) => {
         };
 
         return res.status(200).json(result);
+
     }catch(error){
 
-        console.log(error);
         res.status(404).json(error);
+
     };
 };
 

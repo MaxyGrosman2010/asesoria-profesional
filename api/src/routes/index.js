@@ -19,7 +19,10 @@ const editServiceRouter = require('./editService.route');
 const createPreferenceRouter = require('./createPreference.route');
 const feedbackRouter = require('./feedback.route');
 const getServicesByUserRouter = require('./getServicesByUser.route');
-const getUserByIdRouter = require('./getUserById.route')
+const getUserByIdRouter = require("./getUserById.route");
+const reviewRouter = require("./review.route");
+const getAllUsersInfoRouter = require('./getAllUsersInfo.route');
+const changeAdminPrivilagesRouter = require('./changeAdminPrivilages.route');
 const router = Router();
 
 router.use('/service', createServiceRouter);
@@ -34,6 +37,10 @@ router.use('/editUser', editUserRouter);
 router.use('/editService', editServiceRouter);
 router.use('/getUserById', getUserByIdRouter);
 router.use('/getServiceByUser', getServicesByUserRouter);
+router.use("/review", reviewRouter);
+router.use('/allUsers', getAllUsersInfoRouter);
+router.use('/changeAdmin', changeAdminPrivilagesRouter);
+
 //!REFERIDO A LOGIN GOOGLE
 router.use("/loginGoogle", getLoginHandlerRouter);
 router.use(authenticateHandlerRouter);
