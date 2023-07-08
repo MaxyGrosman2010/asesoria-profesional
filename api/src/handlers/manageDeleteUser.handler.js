@@ -1,6 +1,8 @@
 const findUserById = require('../controllers/findUserById.controller');
 const findUserByName = require('../controllers/findUserByName.controller');
 const manageLogicalDeleteUser = require('../controllers/manageLogicalDeleteUser.controller');
+const getUserWithServicesById = require('../controllers/getUserWithServicesById.controller');
+const changeServiceStateToUser = require('../controllers/changeServiceStateToUser.controller')
 
 const logicalDeleteUser = async(req, res) => {
 
@@ -18,7 +20,13 @@ const logicalDeleteUser = async(req, res) => {
 
         await manageLogicalDeleteUser(userToDelete);
 
+        const userWithService = await getUserWithServicesById(req.id);
+
         const updated = await findUserByName(name);
+        
+        const {Services} = userWithService;
+        
+        Services.map(async(service) => await changeServiceStateToUser(service, updated?.isDeleted))
 
         return res.status(200).json(updated);
         

@@ -15,12 +15,12 @@ const getAllUsersInfo = async(req, res) => {
         const response = users.map((user) => {
 
             const newUser = {
-                id: user.id,
                 name: user.name,
                 email: user.email,
                 profilePict: user.profilePict,
                 isAdmin: user.isAdmin,
                 isSuperAdmin: user.isSuperAdmin,
+                isDeleted: user.isDeleted,
                 cantService: user.Services.length
             };
 
