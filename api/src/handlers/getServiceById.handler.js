@@ -13,6 +13,8 @@ const getServiceById = async(req, res) => {
 
         const service = await serviceById(idService);
 
+        if(service.isDeleted) return res.status(404).json({message: "The searched service doesn't exist"});
+
         const { id, name, price, description, files, TypeServices, user_id } = service;
         
         const review = await Review.findAll({
