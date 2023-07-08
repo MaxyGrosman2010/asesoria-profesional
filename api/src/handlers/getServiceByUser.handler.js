@@ -9,11 +9,27 @@ const getServiceByUserId = async(req, res) => {
 
         const {Services} = userWithService;
 
-        const services = Services.map((service) => {
+        const filterServices = Services.filter((service) => !service.isDeleted);
+
+        const services = filterServices.map((service) => {
             
-            const {name, price, description, files, TypeServices} = service;
+            const {
+                name, 
+                price, 
+                description, 
+                files, 
+                TypeServices
+            } = service;
+
             const {type} = TypeServices[0];
-            const result = {name, price, description, files, typeServices: type};
+
+            const result = {
+                name, 
+                price, 
+                description, 
+                files, 
+                typeServices: type
+            };
 
             return result;
 

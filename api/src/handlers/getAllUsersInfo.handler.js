@@ -8,7 +8,7 @@ const getAllUsersInfo = async(req, res) => {
 
         if(!existUser) return res.status(404).json({message: "El usuario no existe"});
         
-        if(!existUser?.isSuperAdmin) return res.status(404).json({message: "No tenes la autoridad para acceder a esta informacion"});
+        if(!existUser?.isAdmin) return res.status(404).json({message: "No tenes la autoridad para acceder a esta informacion"});
 
         const users = await getAllUsers();
 
