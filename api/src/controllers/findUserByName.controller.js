@@ -1,5 +1,5 @@
 const {User} = require('../db');
 
-const findUserById = (name) => User.findOne({where: {name: name}})
+const findUserByName = (name) => User.findOne({where: {name: name}})
 
-module.exports = findUserById;
+module.exports = findUserByName;
