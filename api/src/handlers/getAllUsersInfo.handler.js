@@ -15,6 +15,7 @@ const getAllUsersInfo = async(req, res) => {
         const response = users.map((user) => {
 
             const newUser = {
+                id: user.id,
                 name: user.name,
                 email: user.email,
                 profilePict: user.profilePict,

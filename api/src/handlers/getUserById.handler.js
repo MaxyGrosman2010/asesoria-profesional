@@ -16,7 +16,7 @@ const getUserById = async(req, res) => {
         return res.status(200).json(response);
 
     }catch(error){
-        console.log(error);
+
         res.status(422).json(error);
         
     };
