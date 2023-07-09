@@ -1,5 +1,4 @@
 const findUserById = require('../controllers/findUserById.controller');
-const findUserByName = require('../controllers/findUserByName.controller');
 const manageLogicalDeleteUser = require('../controllers/manageLogicalDeleteUser.controller');
 const manageChangeStateServicesUser = require('../controllers/manageChangeStateServicesUser.controller');
 
@@ -19,15 +18,15 @@ const logicalDeleteUser = async(req, res) => {
 
 
 
-        const {name} = req.body;
+        const {id} = req.body;
 
-        const userToDelete = await findUserByName(name);
+        const userToDelete = await findUserById(id);
 
 
 
         await manageLogicalDeleteUser(userToDelete);
         
-        const updated = await findUserByName(name);
+        const updated = await findUserById(id);
 
         await manageChangeStateServicesUser(userToDelete?.id);
         
