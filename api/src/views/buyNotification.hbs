@@ -1,0 +1,29 @@
+<html>
+
+  <body>
+    <img
+      src='https://gcdn.emol.cl/humor/files/2016/11/memes-de-perros-1.jpg'
+      alt='Transaccion realizada'
+    />
+    <h1>Notificación de Compra</h1>
+    <p>¡Hola {{buyer_name}}!</p>
+    <p>Tu compra/venta con el ID {{sale_id}} tiene el status {{status}}.</p>
+    <p>Detalles de la transacción:</p>
+    <ul>
+      <li>ID de pago (MercadoPago): {{payment_id}}</li>
+      <li>Estado: {{status}}</li>
+      <li>Monto total: ${{totalAmount}}</li>
+    </ul>
+    <p>Los siguientes vendedores han participado en la transacción:</p>
+    <ul>
+      {{#each sellerEmails}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+    <p>Por favor, mantente atento(a) a los correos electrónicos de los
+      vendedores que te contactarán pronto para coordinar los detalles de la
+      entrega y/o servicio.</p>
+    <p>Gracias por utilizar nuestro servicio.</p>
+    <p>¡Que tengas un excelente día!</p>
+  </body>
+</html>

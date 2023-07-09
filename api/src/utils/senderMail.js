@@ -40,6 +40,14 @@ const sendEmailNotification = async (
         subject: 'Notificación de Compra/Venta',
         html: compiledTemplate,
       };
+    } else if (typeNotification === 'vendedor') {
+      // Agregar esta condición para el tipo "vendedor"
+      message = {
+        from: EMAIL_USER,
+        to: emailToSend,
+        subject: 'Notificación de Venta',
+        html: compiledTemplate,
+      };
     } else {
       throw new Error('Tipo de notificación no válido');
     }
