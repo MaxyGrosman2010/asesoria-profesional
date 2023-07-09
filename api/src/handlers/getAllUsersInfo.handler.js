@@ -4,11 +4,11 @@ const getAllUsers = require('../controllers/allUsers.controller');
 const getAllUsersInfo = async(req, res) => {
     try{
 
-        const existUser = await findUserById(req.id);
+        // const existUser = await findUserById(req.id);
 
-        if(!existUser) return res.status(404).json({message: "El usuario no existe"});
+        // if(!existUser) return res.status(404).json({message: "El usuario no existe"});
         
-        if(!existUser?.isAdmin) return res.status(404).json({message: "No tenes la autoridad para acceder a esta informacion"});
+        // if(!existUser?.isAdmin) return res.status(404).json({message: "No tenes la autoridad para acceder a esta informacion"});
 
         const users = await getAllUsers();
 
