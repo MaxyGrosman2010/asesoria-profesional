@@ -10,8 +10,6 @@ const getUserById = async(req, res) => {
 
         const response = {
             name: existUser.name,
-            cellphone: existUser.cellphone,
-            email: existUser.email,
             profilePict: existUser.profilePict
         };
 
