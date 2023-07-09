@@ -4,12 +4,12 @@ const userEdit = async(req, res) => {
     try{
         const { name, password} = req.body;
 
-        const userUpdate = await updateUser(req.id, name, password, req.file);
+        await updateUser(req.id, name, password, req.file);
+
+        const userUpdate = await findUserById(req.id);
 
         let response = {
             name: userUpdate.name,
-            email: userUpdate.email,
-            cellPhone: userUpdate.cellPhone,
             profilePict: userUpdate.profilePict
         };
 
