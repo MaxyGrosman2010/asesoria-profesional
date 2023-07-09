@@ -1,6 +1,7 @@
 const { processSale } = require('../controllers/saleController');
 const mercadopago = require('../controllers/mercadopagoController');
 
+const typeNotification = 'compra/venta';
 let datosBody = [];
 
 function createPreference(req, res) {
@@ -29,7 +30,13 @@ async function getFeedback(req, res) {
     const { payment_id, status, merchant_order_id } = query;
     const items = datosBody;
 
-    await processSale(items, payment_id, status, merchant_order_id);
+    await processSale(
+      items,
+      payment_id,
+      status,
+      merchant_order_id,
+      typeNotification
+    );
 
     res.status(200).json({ message: 'Venta registrada exitosamente' });
   } catch (error) {
