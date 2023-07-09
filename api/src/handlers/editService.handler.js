@@ -20,11 +20,11 @@ const editService = async(req, res) => {
         const {type} = TypeServices[0];
  
         const result = {
-            id: updatedService.id,
-            name: updatedService.name,
-            price: updatedService.price,
-            description: updatedService.description,
-            files: updatedService.files,
+            id: updatedService?.id,
+            name: updatedService?.name,
+            price: updatedService?.price,
+            description: updatedService?.description,
+            files: updatedService?.files,
             typeService: type
         };
 

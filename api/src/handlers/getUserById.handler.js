@@ -6,7 +6,7 @@ const getUserById = async(req, res) => {
         const existUser = await findUserById(req.id);
 
         if(!existUser) return res.status(422).json({message: "This user doesn't exist"});
-        if(existUser.isDeleted) return res.status(404).json({message: "This user doesn't exist"});
+        if(existUser?.isDeleted) return res.status(404).json({message: "This user doesn't exist"});
 
         const response = {
             name: existUser.name,

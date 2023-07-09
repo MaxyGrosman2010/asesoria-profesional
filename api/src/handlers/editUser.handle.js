@@ -1,4 +1,5 @@
 const updateUser = require('../controllers/updateUser.controller');
+const findUserById = require('../controllers/findUserById.controller');
 
 const userEdit = async(req, res) => {
     try{
@@ -9,8 +10,8 @@ const userEdit = async(req, res) => {
         const userUpdate = await findUserById(req.id);
 
         let response = {
-            name: userUpdate.name,
-            profilePict: userUpdate.profilePict
+            name: userUpdate?.name,
+            profilePict: userUpdate?.profilePict
         };
 
         return res.status(200).json(response);

@@ -9,23 +9,35 @@ const logicalDeleteUser = async(req, res) => {
 
         const admin = await findUserById(req.id);
 
+
+
         if(!admin) return res.status(404).json({message: "El usuario no existe"});
 
+
+
         if(!admin?.isAdmin) return res.status(404).json({message: "No posee los derechos para realizar esta accion"});
+
+
 
         const {name} = req.body;
 
         const userToDelete = await findUserByName(name);
 
+
+
         await manageLogicalDeleteUser(userToDelete);
-
-        await manageChangeStateServicesUser(userToDelete);
-
+        
         const updated = await findUserByName(name);
+
+        await manageChangeStateServicesUser(userToDelete?.id);
+        
+
 
         return res.status(200).json(updated);
         
     }catch(error){
+
+        console.log(error);
 
         res.status(404).json(error);
 
