@@ -115,13 +115,17 @@
 ###    Da o quita privilegios de admin al usuario, mediante el cambio del estado isAdmin
 ###    Devuelve el Usuario actualizado con su estado de isAdmin la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
 
-
-## Put Manage User Logical delete http://localhost:3001/deleteService/
-###    Necesita token y isAdmin = true
-###    Elimina logicamente al usuario, mediante el cambio del estado isDeleted, tras realizar esto el usuario pierde el accceso al sitio
+## Put Manage User Logical delete http://localhost:3001/deleteUser/
+###    Necesita token y el nombre del usuario a eliminar
+###    Elimina logicamente al usuario si quien lo creo es quien lo esta haciendo, mediante el cambio del estado isDeleted, tras realizar esto el usuario pierde el accceso al sitio
 ###    Devuelve el Usuario actualizado con su estado de isDeleted la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
 
 ## Put Manage Service Logical delete http://localhost:3001/deleteService/
-###    Necesita token del usuario que creo este servico o ser un admin(isAdmin = true)
-###    Elimina logicamente al servicio, mediante el cambio del estado isDeleted, tras realizar esto el servicio no deberia deberia aparecer en el sitio(Terminar de aplicar)
+###    Necesita token y user_id igual al id del token
+###    Elimina logicamente al servicio si quien lo creo es quien lo esta haciendo, mediante el cambio del estado isDeleted, tras realizar esto el usuario pierde el accceso al sitio
+###    Devuelve el Usuario actualizado con su estado de isDeleted la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
+
+## Put Manage Service Logical Admin delete http://localhost:3001/deleteServiceAdmin/
+###    Necesita token y ser un admin(isAdmin = true)
+###    Elimina logicamente al servicio si quien lo esta haciendo es un admin, mediante el cambio del estado isDeleted, tras realizar esto el servicio no deberia deberia aparecer en el sitio(Terminar de aplicar)
 ###    Devuelve el servicio actualizado con su estado de isDeleted la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
