@@ -1,16 +1,17 @@
 const updateUser = require('../controllers/updateUser.controller');
+const findUserById = require('../controllers/findUserById.controller');
 
 const userEdit = async(req, res) => {
     try{
         const { name, password} = req.body;
 
-        const userUpdate = await updateUser(req.id, name, password, req.file);
+        await updateUser(req.id, name, password, req.file);
+
+        const userUpdate = await findUserById(req.id);
 
         let response = {
-            name: userUpdate.name,
-            email: userUpdate.email,
-            cellPhone: userUpdate.cellPhone,
-            profilePict: userUpdate.profilePict
+            name: userUpdate?.name,
+            profilePict: userUpdate?.profilePict
         };
 
         return res.status(200).json(response);

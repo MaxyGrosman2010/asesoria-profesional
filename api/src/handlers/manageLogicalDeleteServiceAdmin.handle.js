@@ -2,7 +2,7 @@ const findUserById = require('../controllers/findUserById.controller');
 const findServiceById = require('../controllers/serviceById.controller');
 const manageLogicalDeleteService = require('../controllers/manageLogicalDeleteService.controller');
 
-const logicalDeleteService = async(req, res) => {
+const logicalDeleteServiceAdmin = async(req, res) => {
 
     try{
 
@@ -14,7 +14,7 @@ const logicalDeleteService = async(req, res) => {
 
         const serviceToDelete = await findServiceById(id);
 
-        if(serviceToDelete?.user_id !== req.id) 
+        if(!user?.isAdmin) 
             return res.status(404).json({
 
                 message: "No posee lo derechos para eliminar este servico"
@@ -47,4 +47,4 @@ const logicalDeleteService = async(req, res) => {
     };
 };
 
-module.exports = logicalDeleteService;
+module.exports = logicalDeleteServiceAdmin;

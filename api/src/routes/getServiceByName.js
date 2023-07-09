@@ -2,7 +2,6 @@ const { Router } = require('express');
 const { Op } = require('sequelize');
 const { Service } = require('../db');
 const router = Router();
-const verifyToken = require("../middleware/verifyToken");
 
 router.get('/', async (req, res) => {
   try {
@@ -14,14 +13,20 @@ router.get('/', async (req, res) => {
         name: {
           [Op.iLike]: `%${name}%`,
         },
+        
       },
     });
 
-    const filter = services.filter((service) => !service.isDeleted)
+    const halfway = services?.filter((service) => !service?.isDeleted);
 
-    res.status(200).json(filter);
+    const response = halfway?.filter((service) => !service?.userIsDeleted);
+
+    res.status(200).json(response);
+
   } catch (error) {
+
     res.status(500).json({ error: 'Internal server error' });
+
   }
 });
 

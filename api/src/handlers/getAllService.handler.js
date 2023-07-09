@@ -1,10 +1,15 @@
 const allService = require('../controllers/allService.controller');
-const db = require('../db');
 
 const getAllService = async (req, res) => {
   try{
 
-    const services = await allService();
+    const unfilter = await allService();
+
+
+    const halfway = unfilter?.filter((service) => !service?.isDeleted);
+
+
+    const services = halfway?.filter((service) => !service?.userIsDeleted);
     
     const result = services.map((service) => {
 

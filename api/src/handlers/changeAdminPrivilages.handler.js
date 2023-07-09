@@ -8,7 +8,7 @@ const changeAdminPrivilages = async(req, res) => {
 
         if(!existUser) return res.status(404).json({message: "El usuario no existe"});
 
-        if(!existUser.isSuperAdmin) return res.status(404).json({message: "No posee los derechos para realizar esta accion"});
+        if(!existUser?.isAdmin) return res.status(404).json({message: "No posee los derechos para realizar esta accion"});
 
         const {name} = req.body;
 
@@ -22,7 +22,6 @@ const changeAdminPrivilages = async(req, res) => {
 
     }catch(error){
 
-        console.log(error);
         res.status(404).json(error);
 
     };
