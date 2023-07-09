@@ -116,7 +116,7 @@
 ###    Devuelve el Usuario actualizado con su estado de isAdmin la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
 
 ## Put Manage User Logical delete http://localhost:3001/deleteUser/
-###    Necesita token y el nombre del usuario a eliminar
+###    Necesita token y el id del usuario a eliminar
 ###    Elimina logicamente al usuario si quien lo creo es quien lo esta haciendo, mediante el cambio del estado isDeleted, tras realizar esto el usuario pierde el accceso al sitio
 ###    Devuelve el Usuario actualizado con su estado de isDeleted la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
 
