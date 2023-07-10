@@ -63,8 +63,8 @@
 ###    email: string,
 ###    profilePict: string, url de foto,
 
-## Get ServicesByUserId: http://localhost:3001/getServiceByUser/:id
-###    Necesita el id por param
+## Get ServicesByUser: http://localhost:3001/getServiceByUser/
+###    Necesita el token
 ###    Devuelve un array de objetos que contiene las siguientes propiedades:
 ###    id: int,
 ###    name: string,
