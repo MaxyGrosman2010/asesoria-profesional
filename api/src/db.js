@@ -49,7 +49,7 @@ const { Sale, User, Service, TypeService, SoldService, Review } =
   sequelize.models;
 
 //!RELACIONES DE VENTAS
-Sale.belongsTo(User, { as: 'seller', foreignKey: 'seller_id' });
+//Sale.belongsTo(User, { as: 'seller', foreignKey: 'seller_id' });
 Sale.belongsTo(User, { as: 'buyer', foreignKey: 'buyer_id' });
 
 SoldService.belongsTo(User, { foreignKey: 'seller_id' });

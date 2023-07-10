@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: false,
     },
     password: {
       type: DataTypes.STRING,
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   });
 };
