@@ -24,6 +24,7 @@ const getServiceByUserId = async(req, res) => {
             const {type} = TypeServices[0];
 
             const result = {
+                id,
                 name, 
                 price, 
                 description, 
