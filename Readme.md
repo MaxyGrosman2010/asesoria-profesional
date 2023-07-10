@@ -53,8 +53,8 @@
 ###    files: string, url de foto,
 ###    type: string, tipo de TypeService
 
-## Get UserById: http://localhost:3001/getUserById/:id
-###    Necesita el id por param
+## Get UserById: http://localhost:3001/getUserById/
+###    Necesita el token
 ###    Devuelve un objeto con las siguientes propiedades:
 ###    id: int,
 ###    name: string,
