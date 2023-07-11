@@ -3,8 +3,8 @@ const { conn } = require('./src/db.js');
 const loadBackend = require('./src/middleware/loadBackend.js');
 
 //conn.sync({ force: false }).then(async () => {
-//conn.sync({ alter: true }).then(async () => {
-conn.sync({ force: true }).then(async () => {
+conn.sync({ alter: true }).then(async () => {
+  //conn.sync({ force: true }).then(async () => {
   //bdd se reinicia con el server↑↑↑
 
   await loadBackend();

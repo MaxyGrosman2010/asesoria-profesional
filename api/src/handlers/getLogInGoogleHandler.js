@@ -1,24 +1,24 @@
-const passport = require("passport");
-require("../middleware/passport");
-const loginController = require("../controllers/getLogInControllerGoogle");
+const passport = require('passport');
+require('../middleware/passport');
+const loginController = require('../controllers/getLogInControllerGoogle');
 
 const getLoginHandler = (req, res) => {
   res.send("<button><a href='/auth'>Login With Google</a></button>");
 };
 
-const authenticateHandler = passport.authenticate("google", {
-  scope: ["email", "profile"],
+const authenticateHandler = passport.authenticate('google', {
+  scope: ['email', 'profile'],
 });
 
-const authCallbackHandler = passport.authenticate("google", {
-  successRedirect: "/auth/callback/success",
-  failureRedirect: "/auth/callback/failure",
+const authCallbackHandler = passport.authenticate('google', {
+  successRedirect: '/auth/callback/success',
+  failureRedirect: '/auth/callback/failure',
 });
 
 const loginSuccessHandler = async (req, res, next) => {
   try {
     if (!req.user) {
-      res.redirect("/auth/callback/failure");
+      res.redirect('/auth/callback/failure');
       return;
     }
 
@@ -45,23 +45,23 @@ const loginSuccessHandler = async (req, res, next) => {
     };
 
     console.log(newUser.token.token);
-    res.cookie("token", newUser.token.token);
+    res.cookie('token', newUser.token.token);
     res.send(`
       <script>
         window.opener.postMessage(${JSON.stringify(
           updatedFrontUser
-        )}, 'http://localhost:5173');
+        )}, 'http://localhost:5173/home');
         window.close();
       </script>
     `);
   } catch (error) {
-    console.error("ALERTA:", error);
+    console.error('ALERTA:', error);
     // Respondo si el usuario existe.
   }
 };
 
 const loginFailureHandler = (req, res) => {
-  res.send("Error");
+  res.send('Error');
 };
 
 const getLogoutHandler = function (req, res, next) {
@@ -78,7 +78,7 @@ const getLogoutHandler = function (req, res, next) {
         return next(err);
       }
       // redirect to the root URL after logout
-      res.redirect("/loginGoogle");
+      res.redirect('/loginGoogle');
     });
   });
 };
