@@ -6,8 +6,12 @@ const reviewHandler = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) throw new Error(errors.throw());
 
-    await reviewController(req.body, req.id);
-
+    const reviewer = await reviewController(req.body, req.id);
+    if (reviewer.existingReview) {
+      res.status(400).json({
+        error: "Ya existe una revisión asociada a este usuario y servicio.",
+      });
+    }
     return (
       res
         .status(200)
