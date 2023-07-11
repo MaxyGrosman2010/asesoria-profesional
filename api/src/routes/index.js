@@ -26,6 +26,7 @@ const changeAdminPrivilagesRouter = require('./changeAdminPrivilages.route');
 const manageLogicalDeleteUserRouter = require('./manageDeleteUser.route');
 const manageLogicalDeleteServiceRouter = require('./manageLogicalDeleteService.route');
 const manageLogicalDeleteServiceAdminRouter = require('./managaLogicalDeleteServiceAdmin.route');
+const signInAdminRouter = require('./signInAdmin.route');
 const router = Router();
 
 router.use('/service', createServiceRouter);
@@ -45,7 +46,8 @@ router.use('/allUsers', getAllUsersInfoRouter);
 router.use('/changeAdmin', changeAdminPrivilagesRouter);
 router.use('/deleteUser', manageLogicalDeleteUserRouter);
 router.use('/deleteService', manageLogicalDeleteServiceRouter);
-router.use('/deleteServiceAdmin', manageLogicalDeleteServiceAdminRouter)
+router.use('/deleteServiceAdmin', manageLogicalDeleteServiceAdminRouter);
+router.use('/signInAdmin', signInAdminRouter);
 
 //!REFERIDO A LOGIN GOOGLE
 router.use("/loginGoogle", getLoginHandlerRouter);
