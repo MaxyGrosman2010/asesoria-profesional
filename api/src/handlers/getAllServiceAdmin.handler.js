@@ -1,15 +1,16 @@
 const allService = require('../controllers/allService.controller');
+const findUserById = require('../controllers/findUserById.controller')
 
-const getAllService = async (req, res) => {
+const getAllServiceAdmin = async (req, res) => {
   try{
 
-    const unfilter = await allService();
+    const admin = await findUserById(req.id);
 
+    if(!admin) return res.status(404).json({ message: 'The id of the user send is invalid' });
 
-    const halfway = unfilter?.filter((service) => !service?.isDeleted);
+    if(!admin?.isAdmin) return res.status(404).json({message: "No tenes la autoridad para acceder a esta informacion"});
 
-
-    const services = halfway?.filter((service) => !service?.userIsDeleted);
+    const services = await allService();
     
     const result = services.map((service) => {
 
@@ -24,6 +25,8 @@ const getAllService = async (req, res) => {
         files, 
         user_id, 
         typeService: type,
+        isDeleted,
+        userIsDeleted
       };
       
     });
@@ -37,4 +40,4 @@ const getAllService = async (req, res) => {
   };
 };
 
-module.exports = getAllService;
+module.exports = getAllServiceAdmin;
