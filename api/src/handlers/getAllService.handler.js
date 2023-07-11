@@ -13,10 +13,20 @@ const getAllService = async (req, res) => {
     
     const result = services.map((service) => {
 
-      const {id, name, price, description, files, TypeServices, user_id} = service;
+      const {id, name, price, description, files, TypeServices, user_id, isDeleted, userIsDeleted} = service;
       const type = TypeServices.length > 0 ? TypeServices[0].type : null;
 
-      return { id, name, price, description, files, user_id, typeService: type };
+      return {
+        id, 
+        name, 
+        price, 
+        description, 
+        files, 
+        user_id, 
+        typeService: type, 
+        isDeleted, 
+        userIsDeleted 
+      };
       
     });
 
