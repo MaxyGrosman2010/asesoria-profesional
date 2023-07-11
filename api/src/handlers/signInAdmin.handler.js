@@ -43,16 +43,16 @@ const signInAdmin = async(req, res) => {
 
 
 
-        // const response = {
-        //     token,
-        // }
+        const response = {
+            token: token?.token
+        }
 
-        return res.status(200).json(token);
+        return res.status(200).json(response);
 
     }catch(error){
 
         return res.status(404).json(error);
-        
+
     };
 };
 

@@ -129,3 +129,8 @@
 ###    Necesita token y ser un admin(isAdmin = true)
 ###    Elimina logicamente al servicio si quien lo esta haciendo es un admin, mediante el cambio del estado isDeleted, tras realizar esto el servicio no deberia deberia aparecer en el sitio(Terminar de aplicar)
 ###    Devuelve el servicio actualizado con su estado de isDeleted la primera entrada cambia el false a true, y la siguientes entradas invierten esta relacion
+
+## Post Sign In Admin http://localhost:3001/signInAdmin/
+###     Necesita email y password por body.
+###     Si el usuario tratando de conectarse, existe, no esta borrado logicamente y es admin devuelve un token de un usuario con permisos de admin.
+###     De vuelve un token de un usuario admin.
