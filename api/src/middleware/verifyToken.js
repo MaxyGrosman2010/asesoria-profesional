@@ -16,9 +16,9 @@ const verifyToken = (req, res, next) => {
     const tokenized = jwt.verify(token, SECRET_KEY);
     req.id = tokenized.id;
     req.email = tokenized.email;
-    // res.status(200).json({
-    //   msg: "access granted",
-    // });
+
+
+    
     next();
   } catch (error) {
     console.log(error);
