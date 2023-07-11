@@ -136,3 +136,7 @@
 ###     Necesita email y password por body.
 ###     Si el usuario tratando de conectarse, existe, no esta borrado logicamente y es admin devuelve un token de un usuario con permisos de admin.
 ###     De vuelve un token de un usuario admin.
+
+## Get All Services Admin http://localhost:3001/AllServiceAdmin/
+###    Necesita token
+###    Devuelve todos los servicios y su estado respecto al borrado logico.
