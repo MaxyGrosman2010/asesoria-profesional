@@ -1,3 +1,4 @@
+const htmlContent = require('../utils/htmlContent');
 const { processSale } = require('../controllers/saleController');
 const mercadopago = require('../controllers/mercadopagoController');
 
@@ -38,7 +39,7 @@ async function getFeedback(req, res) {
       typeNotification
     );
 
-    res.status(200).json({ message: 'Venta registrada exitosamente' });
+    res.status(200).send(htmlContent);
   } catch (error) {
     console.error('linea 36 handler: Error al registrar la venta:', error);
     res.status(500).json({ error: 'Error al registrar la venta linea 37' });
