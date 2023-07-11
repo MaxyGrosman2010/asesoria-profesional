@@ -24,6 +24,7 @@ const singInHandler = async (req, res) => {
           expires: new Date(Date.now() + tokenReceived.expireIn * 1000),
           name: tokenReceived.nameUser,
           profilePict: tokenReceived.profilePict,
+          isAdmin: tokenReceived.isAdmin
         })
     );
   } catch (error) {
