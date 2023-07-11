@@ -26,6 +26,8 @@
 ###    price: int,
 ###    files: string, url de la foto del servicio,
 ###    typeService: string
+###    isDeleted: Boolean
+###    userIsDeleted: Boolean
 
 ## Get allTypeService: http://localhost:3001/allTypeService/
 ###    Envia un array de objetos con las siguientes propiedades:
