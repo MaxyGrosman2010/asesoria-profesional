@@ -11,8 +11,12 @@ const logicalDeleteService = async(req, res) => {
         if(!user) return res.status(404).json({message: "El usuario no existe"});
 
         const {id} = req.body;
+        
+
 
         const serviceToDelete = await findServiceById(id);
+
+        
 
         if(serviceToDelete?.user_id !== req.id) 
             return res.status(404).json({

@@ -1,6 +1,8 @@
+const htmlContent = require('../utils/htmlContent');
 const { processSale } = require('../controllers/saleController');
 const mercadopago = require('../controllers/mercadopagoController');
 
+const typeNotification = 'compra/venta';
 let datosBody = [];
 
 function createPreference(req, res) {
@@ -14,7 +16,7 @@ function createPreference(req, res) {
     //.createPreference(description, price, quantity)
     .createPreference('SERVICIOS VARIOS', body.totalAmount, body.quantity)
     .then((preferenceId) => {
-      console.log('linea 17');
+      // console.log('linea 17');
       res.json({ id: preferenceId });
       //console.log(`linea 15`, datosBody);
     })
@@ -29,12 +31,18 @@ async function getFeedback(req, res) {
     const { payment_id, status, merchant_order_id } = query;
     const items = datosBody;
 
-    await processSale(items, payment_id, status, merchant_order_id);
+    await processSale(
+      items,
+      payment_id,
+      status,
+      merchant_order_id,
+      typeNotification
+    );
 
-    res.status(200).json({ message: 'Venta registrada exitosamente' });
+    res.status(200).send(htmlContent);
   } catch (error) {
-    console.error('Error al registrar la venta:', error);
-    res.status(500).json({ error: 'Error al registrar la venta' });
+    console.error('linea 36 handler: Error al registrar la venta:', error);
+    res.status(500).json({ error: 'Error al registrar la venta linea 37' });
   }
 }
 
