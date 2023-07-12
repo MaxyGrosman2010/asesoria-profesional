@@ -19,12 +19,19 @@ const logicalSoldServiceByUser = async (req, res) => {
     });
 
     // Paso 3: Obtener los servicios vendidos para cada venta
+
     const soldServicesBySale = await Promise.all(
       sales.map(async (sale) => {
         const soldServices = await SoldService.findAll({
           where: {
             sale_id: sale.id,
           },
+          include: [
+            {
+              model: Service,
+              attributes: ['name', 'price', 'files'], // Agrega los atributos 'name' y 'price' del modelo Service
+            },
+          ],
         });
         return {
           saleId: sale.id,
@@ -35,7 +42,14 @@ const logicalSoldServiceByUser = async (req, res) => {
 
     // Paso 4: Formatear y enviar la respuesta
     const response = {
-      soldServicesBySale
+      soldServicesBySale: soldServicesBySale.map((sale) => ({
+        soldServices: sale.soldServices.map((soldService) => ({
+          id: soldService.id,
+          name: soldService.Service.name,
+          price: soldService.Service.price,
+          photo: soldService.Service.files,
+        })),
+      })),
     };
 
     res.json(response);
