@@ -48,8 +48,15 @@ const sendEmailNotification = async (
         subject: 'Notificación de Venta',
         html: compiledTemplate,
       };
+    } else if (!typeNotification) {
+       message = {
+         from: EMAIL_USER,
+         to: emailToSend,
+         subject: "Contacto",
+         message: compiledTemplate,
+       };
     } else {
-      throw new Error('Tipo de notificación no válido');
+      throw new Error("Tipo de notificación no válido");
     }
 
     const transport = nodemailer.createTransport(config);
