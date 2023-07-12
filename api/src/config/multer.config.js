@@ -9,4 +9,5 @@ const uploadCreateService = multer({ storage: multer.memoryStorage() }).single(
   "files"
 );
 
+
 module.exports = { uploadSingUp, uploadCreateService };

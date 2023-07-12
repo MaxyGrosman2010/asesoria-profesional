@@ -1,11 +1,12 @@
-const { Review } = require("../db");
+const { Review, User, Service } = require("../db");
 
 const reviewController = async (req, user_id) => {
   try {
     const { idService, reviewDescription, score } = req;
 
     const existingReview = await Review.findOne({
-      where: { user_id, serviceId },
+      where: { id: userId, id: serviceId },
+      include: [{ model: User }, { model: Service }],
     });
     if (existingReview) {
       return 1
