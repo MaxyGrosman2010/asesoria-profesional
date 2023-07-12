@@ -3,10 +3,10 @@ const { body, validationResult } = require("express-validator");
 const validateSingUp = [
   body("name").notEmpty().withMessage("name es requerido"),
   body("password").notEmpty().withMessage("password es requerido"),
-  body("cellPhone")
-    .notEmpty()
+  // body("cellPhone")
+    // .notEmpty()
     //.isNumeric()
-    .withMessage("cellPhone es requerido"),
+    // .withMessage("cellPhone es requerido"),
   body("email").notEmpty().withMessage("email es requerido"),
   // body("isAdmin")
   //   .notEmpty()
