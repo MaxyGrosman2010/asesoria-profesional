@@ -31,12 +31,12 @@ const refreshToken = (user, shhh) => {
     );
 
     return refreshToken;
-    // res.cookie("refreshToken", refreshToken, {
-    //   httpOnly: true,
-    //   secure: !(process.env.MODO === "developer"),
-    //   expires: new Date(Date.now() + expiresIn * 1000),
-    //   sameSite: "none",
-    // });
+
+
+
+
+
+ 
   } catch (error) {
     console.log(error);
   }

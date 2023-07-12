@@ -8,11 +8,11 @@ const singUp = async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) throw new Error(errors.throw());
-   // console.log(req.file);
+
     const siningUp = await singUpController(req.body, USER_CREATION);
 
     if (siningUp?.error) {
-      //console.log(siningUp);
+
       return res.status(401).json(siningUp);
     } 
     

@@ -3,7 +3,6 @@ const sendEmailNotification = require('../utils/senderMail');
 const fs = require('fs');
 const path = require('path');
 const templateCreation = require('../utils/templateCreation');
-const { log } = require('console');
 
 async function processSale(
   items,

@@ -9,18 +9,11 @@ const userEdit = async(req, res) => {
         await updateUser(req.id, name, password, req.file);
         
         const userUpdate = await findUserById(req.id);
-
-        let response = {
-            name: userUpdate?.name,
-            profilePict: userUpdate?.profilePict
-        };
+        let response = { name: userUpdate?.name, profilePict: userUpdate?.profilePict };
 
         return res.status(200).json(response);
-
     }catch(error){
-        
         res.status(404).json(error);
-        
     };
 };
 

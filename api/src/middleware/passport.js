@@ -18,7 +18,6 @@ passport.use(
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
-      // console.log(profile); // Verifica los datos del perfil
       const userData = {
         email: profile.email,
         name: profile.displayName,

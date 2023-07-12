@@ -1,9 +1,6 @@
 const mercadopago = require('mercadopago');
 require('dotenv').config();
-const MP_ACCES_TOKEN = process.env.MP_ACCES_TOKEN;
-
-const URL_DEPLOY = 'https://backend-production-cda4.up.railway.app';
-const URL_LOCAL = 'http://localhost:3001';
+const {MP_ACCES_TOKEN, URL_DEPLOY} = process.env;
 
 mercadopago.configure({
   access_token: MP_ACCES_TOKEN,

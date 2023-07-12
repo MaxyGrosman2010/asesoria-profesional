@@ -1,5 +1,5 @@
 const { User } = require('../db');
-const { tokenCreated, refreshToken } = require('../utils/createToken.js');
+const { tokenCreated } = require('../utils/createToken.js');
 const { SECRET_KEY } = process.env;
 
 const loginController = async (dataUser) => {
