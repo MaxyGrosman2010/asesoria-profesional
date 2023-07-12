@@ -7,6 +7,7 @@ const sendEmailNotification = async (
   compiledTemplate
 ) => {
   try {
+
     const config = {
       host: EMAIL_HOST,
       port: EMAIL_PORT,
@@ -49,11 +50,12 @@ const sendEmailNotification = async (
         html: compiledTemplate,
       };
     } else if (!typeNotification) {
+      
        message = {
          from: EMAIL_USER,
-         to: emailToSend,
+         to: EMAIL_USER,
          subject: "Contacto",
-         message: compiledTemplate,
+         text:compiledTemplate ,
        };
     } else {
       throw new Error("Tipo de notificación no válido");
