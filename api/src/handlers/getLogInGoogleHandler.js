@@ -5,8 +5,8 @@ const URL_LOCAL = 'http://localhost:3001';
 
 const URL_DEPLOY_BACK = 'https://backend-production-cda4.up.railway.app';
 const URL_DEPLOY_FRONT =
-  /*'http://localhost:5173';*/
-  'https://asesoria-profesional-pf-henry-frontend-euwg.vercel.app';
+  'http://localhost:5173';
+  // 'https://asesoria-profesional-pf-henry-frontend-euwg.vercel.app';
 
 const getLoginHandler = (req, res) => {
   res.send("<button><a href='/auth'>Login With Google</a></button>");
