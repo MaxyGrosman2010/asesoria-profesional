@@ -1,5 +1,9 @@
-const {User} = require('../db');
+const {User, Service} = require('../db');
 
-const findUserById = (id) => User.findByPk(id)
+const findUserById = (id) => User.findByPk(id, {
+    include: [{
+        model: Service,
+    }]
+});
 
 module.exports = findUserById;
