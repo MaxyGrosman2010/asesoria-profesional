@@ -5,7 +5,7 @@ const reviewController = async (req, user_id) => {
     const { idService, reviewDescription, score } = req;
 
     const existingReview = await Review.findOne({
-      where: { id: userId, id: serviceId },
+      where: { id: user_id, id: idService },
       include: [{ model: User }, { model: Service }],
     });
     if (existingReview) {
