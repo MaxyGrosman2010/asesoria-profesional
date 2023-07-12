@@ -22,8 +22,9 @@ const singInController = async (req) => {
     //Extaemos el nombre del usuario
     const nameUser = user.name;
     const profilePict = user.profilePict;
+    const isAdmin = user.isAdmin;
     //const refreshedToken = refreshToken(newUser, SECRET_KEY);
-    return { token: token.token, nameUser, profilePict, expireIn: token.expiresIn };
+    return { token: token.token, nameUser, profilePict, isAdmin, expireIn: token.expiresIn };
   } catch (error) {
     console.log(error);
   }

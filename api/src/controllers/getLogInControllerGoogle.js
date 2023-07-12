@@ -1,8 +1,8 @@
-const { User } = require("../db");
-const { tokenCreated, refreshToken } = require("../utils/createToken.js");
+const { User } = require('../db');
+const { tokenCreated, refreshToken } = require('../utils/createToken.js');
 const { SECRET_KEY } = process.env;
 
-const loginController = async ( dataUser) => {
+const loginController = async (dataUser) => {
   const { displayName, email, photos } = dataUser;
   const photoUrl = photos[0].value;
 
@@ -28,9 +28,9 @@ const loginController = async ( dataUser) => {
         ...dataUser,
         User_id: newUser.id,
       };
+      const token = tokenCreated(newUser, SECRET_KEY);
 
-      //res.status(200).json({ token: token });
-      return updatedDataUser;
+      return { updatedDataUser, token };
     }
   } catch (error) {
     throw error;

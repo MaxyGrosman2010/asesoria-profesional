@@ -2,6 +2,9 @@ const mercadopago = require('mercadopago');
 require('dotenv').config();
 const MP_ACCES_TOKEN = process.env.MP_ACCES_TOKEN;
 
+const URL_DEPLOY = 'https://backend-production-cda4.up.railway.app';
+const URL_LOCAL = 'http://localhost:3001';
+
 mercadopago.configure({
   access_token: MP_ACCES_TOKEN,
 });
@@ -17,9 +20,9 @@ function createPreference(description, price, quantity) {
         },
       ],
       back_urls: {
-        success: 'http://localhost:3001/feedback',
-        failure: 'http://localhost:3001/feedback',
-        pending: 'http://localhost:3001/feedback',
+        success: `${URL_DEPLOY}/feedback`,
+        failure: `${URL_DEPLOY}/feedback`,
+        pending: `${URL_DEPLOY}/feedback`,
       },
       auto_return: 'approved',
     };
