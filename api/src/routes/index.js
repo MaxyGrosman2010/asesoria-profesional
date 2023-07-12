@@ -29,7 +29,7 @@ const manageLogicalDeleteServiceAdminRouter = require('./managaLogicalDeleteServ
 const signInAdminRouter = require('./signInAdmin.route');
 const getAllServiceAdminRouter = require('./getAllServiceAdmin.route');
 const manageLogicalSoldServiceByUser = require('./manageLogicalSoldServiceByUser');
-const contactUsHandler = require('../handlers/contactUs.handler');
+const contactUsHandler = require('./contactUs.route');
 const router = Router();
 
 router.use('/service', createServiceRouter);
