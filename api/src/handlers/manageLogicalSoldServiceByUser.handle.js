@@ -1,4 +1,4 @@
-const { User, Sale, Service, SoldService } = require('../db');
+const { User, Sale, SoldService } = require('../db');
 
 const logicalSoldServiceByUser = async (req, res) => {
   try {
@@ -54,7 +54,7 @@ const logicalSoldServiceByUser = async (req, res) => {
 
     res.json(response);
   } catch (error) {
-    console.error('Error al obtener las compras del usuario:', error);
+
     res
       .status(500)
       .json({ message: 'Error al obtener las compras del usuario' });

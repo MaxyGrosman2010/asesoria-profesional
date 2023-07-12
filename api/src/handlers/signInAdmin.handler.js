@@ -11,49 +11,22 @@ const signInAdmin = async(req, res) => {
 
         if(!errors.isEmpty()) throw new Error(errors.throw());
 
-
-
         const {email, password} = req.body;
-
         const user = await findUserByEmail(email);
 
-
-
         if(!user) return res.status(404).json({error: "Credenciales invalidas"});
-
-
-
         if(user?.isDeleted) return res.status(404).json({ error: "Este usuario fue baneado o eliminado"});
-
-
-
         if(!user?.isAdmin) return res.status(404).json({error: "No es un admin"});
-
-
 
         const passCompare = await bcrypt.compare(password, user?.password);
 
-
-
         if(!passCompare) return res.status(404).json({ error: "Credenciales invalidas" });
 
-
-
         const token = await tokenCreated(user, SECRET_KEY);
-
-
-
-        const response = {
-            token: token?.token
-        }
+        const response = { token: token?.token }
 
         return res.status(200).json(response);
-
-    }catch(error){
-
-        return res.status(404).json(error);
-
-    };
+    }catch(error){ return res.status(404).json(error) };
 };
 
 module.exports = signInAdmin;

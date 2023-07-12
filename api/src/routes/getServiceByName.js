@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   try {
     const { name } = req.query;
 
-    // BUSQUEDA SIN MAYUS NI MINUS
+
     const services = await Service.findAll({
       where: {
         name: {

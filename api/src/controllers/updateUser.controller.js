@@ -12,7 +12,7 @@ const updateUser = async(id, name, password, file) => {
         name: name,
         password: hashedPassword, 
         profilePict: uploaded 
-    }, {where: {id: id}});
+    }, { where: { id: id } } );
 
     return user;
 };
