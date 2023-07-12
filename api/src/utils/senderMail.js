@@ -7,6 +7,7 @@ const sendEmailNotification = async (
   compiledTemplate
 ) => {
   try {
+
     const config = {
       host: EMAIL_HOST,
       port: EMAIL_PORT,
@@ -48,8 +49,16 @@ const sendEmailNotification = async (
         subject: 'Notificación de Venta',
         html: compiledTemplate,
       };
+    } else if (!typeNotification) {
+      
+       message = {
+         from: EMAIL_USER,
+         to: EMAIL_USER,
+         subject: "Contacto",
+         text:compiledTemplate ,
+       };
     } else {
-      throw new Error('Tipo de notificación no válido');
+      throw new Error("Tipo de notificación no válido");
     }
 
     const transport = nodemailer.createTransport(config);
