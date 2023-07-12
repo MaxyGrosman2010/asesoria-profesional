@@ -7,12 +7,12 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_TABLE, DB_DEPLOY } =
   process.env;
 
 //↓↓↓COMENTAR PARA USA LA BASE DE DATOS LOCAL, ESTO ES LA DB DEPLOYADA EN RAILWAY
-/*
-const sequelize = new Sequelize(DB_DEPLOY, {
-  logging: false,
-  native: false,
-});
-*/
+
+// const sequelize = new Sequelize(DB_DEPLOY, {
+//   logging: false,
+//   native: false,
+// });
+
 //DESCOMENTAR PARA USAR LOCAL
 
 const sequelize = new Sequelize(

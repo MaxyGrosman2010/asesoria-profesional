@@ -5,9 +5,9 @@ const userEdit = async(req, res) => {
     try{
         
         const { name, password} = req.body;
-
+        
         await updateUser(req.id, name, password, req.file);
-
+        
         const userUpdate = await findUserById(req.id);
 
         let response = {

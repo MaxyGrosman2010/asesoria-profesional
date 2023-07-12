@@ -23,8 +23,9 @@ const singInController = async (req) => {
     const nameUser = user.name;
     const profilePict = user.profilePict;
     const isAdmin = user.isAdmin;
+    const isSuperAdmin = user.isSuperAdmin
     //const refreshedToken = refreshToken(newUser, SECRET_KEY);
-    return { token: token.token, nameUser, profilePict, isAdmin, expireIn: token.expiresIn };
+    return { token: token.token, nameUser, profilePict, isAdmin, isSuperAdmin, expireIn: token.expiresIn };
   } catch (error) {
     console.log(error);
   }

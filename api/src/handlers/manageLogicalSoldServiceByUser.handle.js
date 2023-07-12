@@ -2,10 +2,9 @@ const { User, Sale, Service, SoldService } = require('../db');
 
 const logicalSoldServiceByUser = async (req, res) => {
   try {
-    const { userId } = req.query;
 
     // Paso 1: Buscar el usuario por su ID y obtener el objeto User
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(req.id);
 
     // Si no se encuentra el usuario, enviar una respuesta de error
     if (!user) {
@@ -15,7 +14,7 @@ const logicalSoldServiceByUser = async (req, res) => {
     // Paso 2: Obtener todas las ventas del usuario
     const sales = await Sale.findAll({
       where: {
-        buyer_id: userId,
+        buyer_id: req.id,
       },
     });
 
