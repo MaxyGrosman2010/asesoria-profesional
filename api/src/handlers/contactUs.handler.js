@@ -11,4 +11,4 @@ const contactUsHandler = async (req, res) => {
   }
 };
 
-module.exports = changeAdminPrivilages;
+module.exports = contactUsHandler;
