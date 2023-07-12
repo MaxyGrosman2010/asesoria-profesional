@@ -1,5 +1,6 @@
 # Descripcion del Proyecto Asesoria-Profesional
 ## Este proyecto es el backend del Repositorio de FedeOrefici, Asesoria Profesional PF Henry Frontend. Por lo siguiente su función es dar la funcionalidad necesaria a este para poder realizar las tareas necesarias.
+## Si bien este inicia con el fin de aprobar la etapa de labs de Henry en la seccion de Proyecto Final en cualquier momento los miembros de este equipo podemos coordinarnos para continuar avanzando en grupo, o forkear este repositorio para expandirlo por nuestra cuenta.
 # ----------------------------------------------------------------------------------------------
 
 # Endpoint for Front-end
