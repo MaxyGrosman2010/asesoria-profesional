@@ -6,7 +6,7 @@ const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_TABLE, DB_DEPLOY } = process.env;
 
 // Cambiar todas las variables por DB_DEPLOY para trabajar con el deploy
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_TABLE}`,
+const sequelize = new Sequelize(`postgres://${DB_DEPLOY}`,
   {
     logging: false,
     native: false,
