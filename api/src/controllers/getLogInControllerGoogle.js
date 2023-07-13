@@ -26,6 +26,8 @@ const loginController = async (dataUser) => {
         name: displayName,
         email: email,
         profilePict: photoUrl,
+        isAdmin: false,
+        isSuperAdmin: false
       });
 
       const updatedDataUser = {
