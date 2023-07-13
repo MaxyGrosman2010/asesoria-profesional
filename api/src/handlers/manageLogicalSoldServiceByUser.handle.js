@@ -2,7 +2,6 @@ const { User, Sale, Service, SoldService } = require('../db');
 
 const logicalSoldServiceByUser = async (req, res) => {
   try {
-
     // Paso 1: Buscar el usuario por su ID y obtener el objeto User
     const user = await User.findByPk(req.id);
 
@@ -39,7 +38,25 @@ const logicalSoldServiceByUser = async (req, res) => {
         };
       })
     );
+    /*    const soldServicesBySale = [];
+    for (const sale of sales) {
+      const soldServices = await SoldService.findAll({
+        where: {
+          sale_id: sale.id,
+        },
+        include: [
+          {
+            model: Service,
+            attributes: ['name', 'price', 'files'],
+          },
+        ],
+      });
 
+      soldServicesBySale.push({
+        saleId: sale.id,
+        soldServices,
+      });
+    } */
     // Paso 4: Formatear y enviar la respuesta
     const response = {
       soldServicesBySale: soldServicesBySale.map((sale) => ({

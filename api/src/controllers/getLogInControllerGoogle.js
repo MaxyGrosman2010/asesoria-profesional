@@ -13,7 +13,10 @@ const loginController = async (dataUser) => {
       const updatedDataUser = {
         ...dataUser,
         User_id: existingUser.id,
+        isAdmin: existingUser.isAdmin,
+        isSuperAdmin: existingUser.isSuperAdmin,
       };
+
       const token = tokenCreated(existingUser, SECRET_KEY);
 
       return { updatedDataUser, token };

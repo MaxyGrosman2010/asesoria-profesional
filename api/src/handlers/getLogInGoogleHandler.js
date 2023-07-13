@@ -29,7 +29,8 @@ const loginSuccessHandler = async (req, res, next) => {
 
     //console.log(req.user);
     const dataUser = req.user;
-    const { id, User_id, displayName, email, photos } = req.user;
+    const { id, User_id, displayName, email, photos, isAdmin, isSuperAdmin } =
+      req.user;
     /*const frontUser = {
       User_id: User_id,
       idGoogle: id,
@@ -39,7 +40,7 @@ const loginSuccessHandler = async (req, res, next) => {
     };*/
 
     const newUser = await loginController.loginController(dataUser);
-
+    console.log('datauser linea 42 google handler:', dataUser);
     //console.log("Nuevo usuario agregado:", newUser.displayName);
     const updatedFrontUser = {
       User_id: newUser.updatedDataUser.User_id,
@@ -47,9 +48,10 @@ const loginSuccessHandler = async (req, res, next) => {
       name: newUser.updatedDataUser.displayName,
       email: newUser.updatedDataUser.email,
       profilePict: newUser.updatedDataUser.picture,
+      isAdmin: newUser.updatedDataUser.isAdmin, // Corrección aquí
+      isSuperAdmin: newUser.updatedDataUser.isSuperAdmin,
     };
 
-    console.log(newUser.token.token);
     res.cookie('token', newUser.token.token);
     res.send(`
       <script>
