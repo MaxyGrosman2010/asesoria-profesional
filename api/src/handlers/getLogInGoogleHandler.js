@@ -3,7 +3,7 @@ require('../middleware/passport');
 const loginController = require('../controllers/getLogInControllerGoogle');
 const dotenv = require('dotenv');
 dotenv.config();
-const { URL_DEPLOY_FRONT } = process.env
+const { URL_DEPLOY_FRONT } = process.env;
 
 const getLoginHandler = (req, res) => {
   res.send("<button><a href='/auth'>Login With Google</a></button>");
@@ -25,29 +25,36 @@ const loginSuccessHandler = async (req, res, next) => {
       return;
     }
 
-
     const dataUser = req.user;
-    const { id, User_id, displayName, email, photos } = req.user;
-
+    const { id, User_id, displayName, email, photos, isAdmin, isSuperAdmin } =
+      req.user;
+    /*const frontUser = {
+      User_id: User_id,
+      idGoogle: id,
+      name: displayName,
+      email: email,
+      profilePict: photos[0],
+    };*/
 
     const newUser = await loginController.loginController(dataUser);
-
-
+    //console.log('datauser linea 42 google handler:', dataUser);
+    console.log('Nuevo usuario agregado:', newUser);
     const updatedFrontUser = {
       User_id: newUser.updatedDataUser.User_id,
       idGoogle: newUser.updatedDataUser.id,
       name: newUser.updatedDataUser.displayName,
       email: newUser.updatedDataUser.email,
       profilePict: newUser.updatedDataUser.picture,
+      isAdmin: newUser.updatedDataUser.isAdmin,
+      isSuperAdmin: newUser.updatedDataUser.isSuperAdmin,
     };
 
-    console.log(newUser.token.token);
     res.cookie('token', newUser.token.token);
     res.send(`
       <script>
-        window.opener.postMessage(${JSON.stringify(
-          updatedFrontUser
-        )}, ('${URL_DEPLOY_FRONT}') );
+        window.opener.postMessage(${JSON.stringify(updatedFrontUser)}, ${
+      process.env.URL_DEPLOY_FRONT
+    } );
         window.close();
       </script>
     `);
