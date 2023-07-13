@@ -1,3 +1,4 @@
+const { log } = require('handlebars');
 const { User } = require('../db');
 const { tokenCreated } = require('../utils/createToken.js');
 const { SECRET_KEY } = process.env;
@@ -18,7 +19,7 @@ const loginController = async (dataUser) => {
       };
 
       const token = tokenCreated(existingUser, SECRET_KEY);
-
+      console.log('updatedDataUser:', updatedDataUser);
       return { updatedDataUser, token };
     } else {
       const newUser = await User.create({
