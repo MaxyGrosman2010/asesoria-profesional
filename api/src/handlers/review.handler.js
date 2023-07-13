@@ -7,11 +7,14 @@ const reviewHandler = async (req, res) => {
     if (!errors.isEmpty()) throw new Error(errors.throw());
 
     const reviewer = await reviewController(req.body, req.id);
-    if (reviewer.existingReview) {
+
+    if (reviewer?.existingReview) {
       res.status(400).json({
         error: "Ya existe una review asociada a este usuario y servicio.",
       });
     }
+
+
     return (
       res
         .status(200)

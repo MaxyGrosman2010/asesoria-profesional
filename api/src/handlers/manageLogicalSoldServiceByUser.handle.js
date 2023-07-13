@@ -1,4 +1,4 @@
-const { User, Sale, SoldService } = require('../db');
+const { User, Sale, SoldService, Service } = require('../db');
 
 const logicalSoldServiceByUser = async (req, res) => {
   try {
@@ -19,17 +19,17 @@ const logicalSoldServiceByUser = async (req, res) => {
     });
 
     // Paso 3: Obtener los servicios vendidos para cada venta
-
     const soldServicesBySale = await Promise.all(
-      sales.map(async (sale) => {
-        const soldServices = await SoldService.findAll({
+      sales.map(async(sale) => {
+        try{
+          const soldServices = await SoldService.findAll({
           where: {
             sale_id: sale.id,
           },
           include: [
             {
               model: Service,
-              attributes: ['name', 'price', 'files'], // Agrega los atributos 'name' y 'price' del modelo Service
+              attributes: ['name', 'price', 'files'],
             },
           ],
         });
@@ -37,20 +37,19 @@ const logicalSoldServiceByUser = async (req, res) => {
           saleId: sale.id,
           soldServices,
         };
-      })
+      }catch(error){
+        console.log(error);
+      }})
     );
 
     // Paso 4: Formatear y enviar la respuesta
-    const response = {
-      soldServicesBySale: soldServicesBySale.map((sale) => ({
-        soldServices: sale.soldServices.map((soldService) => ({
+    const response = soldServicesBySale.map((sale) => sale.soldServices.map((soldService) => ({
           id: soldService.id,
           name: soldService.Service.name,
           price: soldService.Service.price,
           photo: soldService.Service.files,
-        })),
-      })),
-    };
+        }))).flat();
+
 
     res.json(response);
   } catch (error) {
