@@ -15,24 +15,12 @@ const createService = async (req, res) => {
 
     if (!errors.isEmpty()) throw new Error(errors.throw());
 
-    const {
-      user_id = req.id,
-      name,
-      typeService,
-      price,
-      description,
-      email = req.email,
-    } = req.body;
-
+    const { user_id = req.id, name, typeService, price, description, email = req.email } = req.body;
     const existUser = await findUserById(user_id);
 
-    if (!existUser)
-      return res
-        .status(404)
-        .json({ message: 'The id of the user send is invalid' });
+    if (!existUser) return res.status(404).json({ message: 'The id of the user send is invalid' });
 
     const existTypeService = await findTypeService(typeService);
-
     const newService = await createServiceController(user_id, name, price, description, req.file);
 
     await linkTypeserviceService(existTypeService, newService);
@@ -42,7 +30,6 @@ const createService = async (req, res) => {
     sendEmailNotification(SERVICE_CREATION, email);
 
     const info = await findServiceById(newService?.id);
-
     const {type} = info?.TypeServices[0];
 
     const response = {
@@ -56,11 +43,8 @@ const createService = async (req, res) => {
     };
 
     return res.status(200).json(response);
-
   } catch (error) {
-
     res.status(422).json(error);
-
   };
 };
 

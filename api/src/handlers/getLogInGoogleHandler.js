@@ -1,11 +1,9 @@
 const passport = require('passport');
 require('../middleware/passport');
 const loginController = require('../controllers/getLogInControllerGoogle');
-const URL_LOCAL = 'http://localhost:3001';
-
-const URL_DEPLOY_BACK = 'https://backend-production-cda4.up.railway.app';
-const URL_DEPLOY_FRONT = 'http://localhost:5173';
-/* 'https://asesoria-profesional-pf-henry-frontend-euwg.vercel.app';*/
+const dotenv = require('dotenv');
+dotenv.config();
+const { URL_DEPLOY_FRONT } = process.env;
 
 const getLoginHandler = (req, res) => {
   res.send("<button><a href='/auth'>Login With Google</a></button>");
@@ -27,7 +25,6 @@ const loginSuccessHandler = async (req, res, next) => {
       return;
     }
 
-    //console.log(req.user);
     const dataUser = req.user;
     const { id, User_id, displayName, email, photos, isAdmin, isSuperAdmin } =
       req.user;

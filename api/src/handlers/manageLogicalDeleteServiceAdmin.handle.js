@@ -11,20 +11,14 @@ const logicalDeleteServiceAdmin = async(req, res) => {
         if(!user) return res.status(404).json({message: "El usuario no existe"});
 
         const {id} = req.body;
-
         const serviceToDelete = await findServiceById(id);
 
         if(!user?.isAdmin) 
-            return res.status(404).json({
-
-                message: "No posee lo derechos para eliminar este servico"
-                
-        });
+            return res.status(404).json({ message: "No posee lo derechos para eliminar este servico" });
 
         await manageLogicalDeleteService(serviceToDelete);
 
         const updated = await findServiceById(id);
-
         const {type} = updated.TypeServices[0];
 
         const response = {
@@ -36,15 +30,11 @@ const logicalDeleteServiceAdmin = async(req, res) => {
             isDeleted: updated.isDeleted,
             typeService: type,
             user_id: updated.user_id
-        }
+        };
 
         return res.status(200).json(response);
         
-    }catch(error){
-
-        res.status(404).json(error);
-
-    };
+    }catch(error){ res.status(404).json(error) };
 };
 
 module.exports = logicalDeleteServiceAdmin;

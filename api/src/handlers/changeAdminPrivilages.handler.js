@@ -11,19 +11,15 @@ const changeAdminPrivilages = async(req, res) => {
         if(!existUser?.isAdmin) return res.status(404).json({message: "No posee los derechos para realizar esta accion"});
 
         const {name} = req.body;
-
         const update = await findUserByName(name);
 
         await updateIsAdmin(update);
-
         const updated = await findUserByName(name);
 
         return res.status(200).json(updated);
 
     }catch(error){
-
         res.status(404).json(error);
-
     };
 };
 
