@@ -40,21 +40,19 @@ const loginSuccessHandler = async (req, res, next) => {
     //console.log('datauser linea 42 google handler:', dataUser);
     console.log('Nuevo usuario agregado:', newUser);
     const updatedFrontUser = {
-      User_id: newUser.updatedDataUser.User_id,
-      idGoogle: newUser.updatedDataUser.id,
       name: newUser.updatedDataUser.displayName,
       email: newUser.updatedDataUser.email,
       profilePict: newUser.updatedDataUser.picture,
       isAdmin: newUser.updatedDataUser.isAdmin,
       isSuperAdmin: newUser.updatedDataUser.isSuperAdmin,
     };
-
+    
     res.cookie('token', newUser.token.token);
+    res.cookie('user', JSON.stringify(updatedFrontUser));
+    // res.status(200).json({mesage: 'hola'})
     res.send(`
       <script>
-        window.opener.postMessage(${JSON.stringify(updatedFrontUser)}, ${
-      process.env.URL_DEPLOY_FRONT
-    } );
+        window.opener.postMessage(${JSON.stringify(updatedFrontUser)}, ${URL_DEPLOY_FRONT} );
         window.close();
       </script>
     `);
